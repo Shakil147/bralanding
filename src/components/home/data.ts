@@ -36,13 +36,12 @@ export const SHIPPING_OPTS = [
 export const ORANGE_BTN: React.CSSProperties = {
   display: "inline-block",
   fontFamily: HIND,
-  fontWeight: 700,
+  fontWeight: 500,
   color: "#fff",
   textDecoration: "none",
-  background: "#ff6a16",
-  border: "2px solid rgba(255,255,255,.55)",
-  borderRadius: "14px 14px 22px 14px",
-  boxShadow: "0 6px 0 rgba(0,0,0,.12)",
+  background: "#FF4600",
+  border: "1px solid #000000",
+  borderRadius: "30px 0px 30px 0px",
 };
 
-export const ORANGE_BTN_CLASS = "text-xl sm:text-2xl md:text-3xl px-7 py-3 sm:px-10 sm:py-3.5";
+export const ORANGE_BTN_CLASS = "text-2xl sm:text-3xl md:text-[40px] px-7 py-3 sm:px-10 sm:py-3.5";
