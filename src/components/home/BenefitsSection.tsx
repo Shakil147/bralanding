@@ -4,7 +4,7 @@ import SectionBand from "./SectionBand";
 export default function BenefitsSection() {
   return (
     <>
-      <SectionBand style={{ marginBottom: 8 }} textStyle={{ maxWidth: 980, marginLeft: "auto", marginRight: "auto" }}>
+      <SectionBand shapeDivider style={{ marginBottom: 8, paddingBottom: 39 }} textStyle={{ maxWidth: 980, marginLeft: "auto", marginRight: "auto" }}>
         ইন্ডিয়ান লাইক মি ব্রা ব্যবহারে যেসব সুবিধা পাবেন:
       </SectionBand>
 
