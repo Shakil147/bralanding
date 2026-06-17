@@ -4,7 +4,7 @@ import SectionBand from "./SectionBand";
 export default function WhyBuySection() {
   return (
     <>
-      <SectionBand style={{ margin: "40px 0 0" }} className="px-4 py-6 sm:px-5 sm:py-[30px]" textClassName="text-2xl sm:text-3xl md:text-[46px]">
+      <SectionBand shapeDivider style={{ margin: "10px 0 0", paddingTop: 40, paddingBottom: 50 + 39 }} className="px-4 sm:px-5" textClassName="text-[35px] sm:text-[40px] md:text-[60px]">
         আমাদের কাছ থেকে কেন কিনবেন?
       </SectionBand>
 
