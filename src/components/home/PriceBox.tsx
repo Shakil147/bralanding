@@ -2,20 +2,40 @@ import { HIND } from "./data";
 
 export default function PriceBox() {
   return (
-    <section style={{ maxWidth: 1040, margin: "14px auto 0" }} className="px-4 sm:px-[22px]">
-      <div style={{ background: "#eef5fd", border: "1px solid #f7c9ad", borderRadius: 14, textAlign: "center" }} className="px-5 py-5 sm:px-[30px] sm:py-[26px]">
-        <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: "0 0 16px" }} className="text-xl sm:text-2xl md:text-[30px]">
+    <section style={{ maxWidth: 1040, margin: "0 auto" }} className="px-4 sm:px-[22px] py-5 sm:py-[50px]">
+      <div style={{ background: "#F0F6FD", border: "1px solid #FF4600", borderRadius: 16, textAlign: "center" }} className="px-5 py-5 sm:px-[20px] sm:py-[20px]">
+        <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: "0 0 16px" }} className="text-lg sm:text-xl md:text-[33px]">
           ৬ পিস কম্বো রেগুলার প্রাইজ -{" "}
-          <span style={{ position: "relative", color: "#3a3a3a" }}>
-            ১৫০০/- টাকা
-            <span style={{ position: "absolute", left: "-6%", top: "50%", width: "112%", height: 3, background: "#e23b1f", transform: "rotate(-9deg)" }} />
-            <span style={{ position: "absolute", left: "42%", top: "-30%", fontSize: "1.5em", color: "#e23b1f", fontWeight: 700, transform: "scaleX(1.3)" }}>✕</span>
+          <span style={{ position: "relative", display: "inline-block", color: "#3a3a3a" }}>
+            <span style={{ fontFamily: HIND, fontWeight: 700 }}>১৫০০/- টাকা</span>
+            <svg
+              viewBox="0 0 500 150"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+              style={{ position: "absolute", left: "50%", top: "50%", width: "calc(100% + 20px)", height: "calc(100% + 20px)", transform: "translate(-50%, -50%)", overflow: "visible" }}
+            >
+              <path d="M497.4,23.9C301.6,40,155.9,80.6,4,144.4" fill="none" stroke="#FF0101" strokeWidth="20" />
+              <path d="M14.1,27.6c204.5,20.3,393.8,74,467.3,111.7" fill="none" stroke="#FF0101" strokeWidth="20" />
+            </svg>
           </span>
         </p>
-        <p style={{ fontFamily: HIND, fontWeight: 600, color: "#2a2a2a", margin: 0 }} className="text-lg sm:text-xl md:text-[28px]">
+        <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: 0 }} className="text-lg sm:text-xl md:text-[33px]">
           ৩২–৪০ সাইজের কম্বো ৯৯৯/- &amp; ৪২–৪৪ সাইজের কম্বো{" "}
-          <span style={{ backgroundImage: "linear-gradient(#2dbd1b,#2dbd1b)", backgroundRepeat: "repeat-x", backgroundPosition: "0 1.05em", backgroundSize: "14px 5px", paddingBottom: 6 }}>
-            ১০৯৯/- টাকা মাত্র
+          <span style={{ position: "relative", display: "inline-block" }}>
+            <span style={{ fontFamily: HIND, fontWeight: 700 }}>১০৯৯/- টাকা মাত্র</span>
+            <svg
+              viewBox="0 0 500 150"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+              style={{ position: "absolute", left: "50%", top: "50%", width: "calc(100% + 20px)", height: "calc(100% + 20px)", transform: "translate(-50%, -50%)", overflow: "visible" }}
+            >
+              <path
+                d="M3,146.1c17.1-8.8,33.5-17.8,51.4-17.8c15.6,0,17.1,18.1,30.2,18.1c22.9,0,36-18.6,53.9-18.6 c17.1,0,21.3,18.5,37.5,18.5c21.3,0,31.8-18.6,49-18.6c22.1,0,18.8,18.8,36.8,18.8c18.8,0,37.5-18.6,49-18.6c20.4,0,17.1,19,36.8,19 c22.9,0,36.8-20.6,54.7-18.6c17.7,1.4,7.1,19.5,33.5,18.8c17.1,0,47.2-6.5,61.1-15.6"
+                fill="none"
+                stroke="#00FF23"
+                strokeWidth="20"
+              />
+            </svg>
           </span>
         </p>
       </div>
