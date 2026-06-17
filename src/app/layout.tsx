@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Hind_Siliguri, Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 
@@ -17,6 +17,11 @@ const notoSerifBengali = Noto_Serif_Bengali({
 export const metadata: Metadata = {
   title: "ইন্ডিয়ান লাইক মি ব্রা — Narimon Closet",
   description: "৬ পিস কম্বো অফার প্রাইজ ৯৯৯/- টাকা মাত্র",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
