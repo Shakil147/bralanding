@@ -22,7 +22,7 @@ export type LandingPage = {
   title: string;
   subtitle: string;
   subtitle2?: string;
-  banner: string;
+  thumbnail: string;
   benefits_image: string;
   why_buy_image: string;
   video_id: string;

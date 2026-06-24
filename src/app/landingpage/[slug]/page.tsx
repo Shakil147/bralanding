@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!page) return {};
   const title = page.seo_title ?? `${page.title} — Narimon Closet`;
   const description = page.seo_description ?? page.subtitle;
-  const ogImage = page.og_image ?? page.banner;
+  const ogImage = page.og_image ?? page.thumbnail;
   return {
     title,
     description,

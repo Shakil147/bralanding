@@ -9,7 +9,7 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     slug: "guddi-bra",
     title: "গুড্ডি ব্রা",
     subtitle: "গরমে শীতল অনুভূতি!",
-    banner:
+    thumbnail:
       "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
     benefits_image:
       "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
@@ -69,7 +69,7 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     slug: "likke-me-bra",
     title: "ইন্ডিয়ান লাইক মি ব্রা",
     subtitle: "নরম, আরামদায়ক, দীর্ঘস্থায়ী!",
-    banner:
+    thumbnail:
       "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg",
     benefits_image:
       "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg",
@@ -128,7 +128,7 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     slug: "sports-bra",
     title: "স্পোর্টস ব্রা",
     subtitle: "ব্যায়াম ও দৌড়ের জন্য পার্ফেক্ট সাপোর্ট!",
-    banner:
+    thumbnail:
       "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
     benefits_image:
       "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
@@ -182,7 +182,7 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     slug: "comfort-bra",
     title: "কমফোর্ট ব্রা",
     subtitle: "সারাদিন আরামে থাকুন!",
-    banner:
+    thumbnail:
       "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg",
     benefits_image:
       "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg",
@@ -238,7 +238,7 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     title: "লুভলেস ব্রা",
     subtitle: "অস্বস্তির সাথে ব্রেকআপ",
     subtitle2: "৩ পিস ব্রা একসাথে নিলেই পাচ্ছেন ৩০% ডিস্কাউন্ট এই মাত্র ৯৯৯ টাকা। কোন অগ্রিম টাকা ছাড়া পন্য অর্ডার করুন।",
-    banner: "https://shop.bunondhara.com/wp-content/uploads/2025/11/56-1.webp",
+    thumbnail: "https://shop.bunondhara.com/wp-content/uploads/2025/11/56-1.webp",
     benefits_image: "https://shop.bunondhara.com/wp-content/uploads/2025/12/new-1-b-1024x1024.webp",
     why_buy_image: "https://shop.bunondhara.com/wp-content/uploads/2025/12/new-3-b.webp",
     video_id: "wEGRD2byTck",

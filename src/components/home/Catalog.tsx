@@ -17,7 +17,7 @@ export default function Catalog({ pages }: { pages: LandingPage[] }) {
               href={`/landingpage/${page.slug}`}
               style={{ display: "block", background: "#fff", border: "1px solid #e3e8ef", borderRadius: 12, overflow: "hidden", textDecoration: "none", color: "#222" }}
             >
-              <img src={page.banner} alt={page.title} style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }} />
+              <img src={page.thumbnail} alt={page.title} style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }} />
               <div style={{ padding: 12 }}>
                 <h3 style={{ fontFamily: HIND, fontWeight: 600, fontSize: 16, margin: "0 0 6px" }}>{page.title}</h3>
                 <p style={{ fontFamily: HIND, fontSize: 14, color: "#555", margin: 0 }}>
