@@ -21,10 +21,14 @@ export type LandingPage = {
   slug: string;
   title: string;
   subtitle: string;
+  subtitle2?: string;
   banner: string;
+  benefits_image: string;
+  why_buy_image: string;
   video_id: string;
   offers: Offer[];
   size_price_offers?: SizePriceOffer[];
+  price_label?: string;
   accent_color?: string;
   seo_title?: string;
   seo_description?: string;
@@ -37,6 +41,7 @@ export type LandingPage = {
   sizes: string[];
   shipping_options: ShippingOption[];
   gallery: string[];
+  reviews?: string[];
   fb_pixel_id: string;
   whatsapp: string;
   phone: string;

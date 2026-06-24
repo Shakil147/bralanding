@@ -4,14 +4,28 @@ import OrderButton from "./OrderButton";
 export default function Header({
   title = "ইন্ডিয়ান লাইক মি ব্রা",
   subtitle = "গরমে শীতল অনুভূতি!",
+  subtitle2,
   price = 999,
   offerLabel,
 }: {
   title?: string;
   subtitle?: string;
+  subtitle2?: string;
   price?: number;
   offerLabel?: string;
 }) {
+  const highlightMatch = subtitle2?.match(/[0-9০-৯]+\s*টাকা/);
+  const squiggle = (
+    <svg
+      viewBox="0 0 500 150"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "calc(100% + 20px)", height: "calc(100% + 20px)", overflow: "visible", stroke: "#15FF00", strokeWidth: 20, strokeLinecap: "round", fill: "none" }}
+    >
+      <path d="M7.7,145.6C109,125,299.9,116.2,401,121.3c42.1,2.2,87.6,11.8,87.3,25.7" />
+    </svg>
+  );
+
   return (
     <header style={{ position: "relative", background: "var(--accent, #f85606)" }} className="text-center px-4 pt-10 sm:px-5 sm:pt-[54px]">
       <h1
@@ -23,20 +37,30 @@ export default function Header({
       <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "18px 0 18px" }} className="text-lg sm:text-xl md:text-2xl">
         {subtitle}
       </p>
-      <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "0 0 30px" }} className="text-lg sm:text-xl md:text-2xl">
-        {offerLabel ? `${offerLabel} ` : ""}অফার প্রাইজ{" "}
-        <span style={{ position: "relative", display: "inline-block", paddingBottom: 8 }}>
-          <span>৳ {price} টাকা মাত্র</span>
-          <svg
-            viewBox="0 0 500 150"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-            style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "calc(100% + 20px)", height: "calc(100% + 20px)", overflow: "visible", stroke: "#15FF00", strokeWidth: 20, strokeLinecap: "round", fill: "none" }}
-          >
-            <path d="M7.7,145.6C109,125,299.9,116.2,401,121.3c42.1,2.2,87.6,11.8,87.3,25.7" />
-          </svg>
-        </span>
-      </p>
+      {subtitle2 ? (
+        <p style={{ fontFamily: HIND, fontWeight: 500, color: "#fff", margin: "0 0 30px" }} className="text-base sm:text-lg md:text-xl">
+          {highlightMatch ? (
+            <>
+              {subtitle2.slice(0, highlightMatch.index)}
+              <span style={{ position: "relative", display: "inline-block", paddingBottom: 8 }}>
+                <span>{highlightMatch[0]}</span>
+                {squiggle}
+              </span>
+              {subtitle2.slice((highlightMatch.index ?? 0) + highlightMatch[0].length)}
+            </>
+          ) : (
+            subtitle2
+          )}
+        </p>
+      ) : (
+        <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "0 0 30px" }} className="text-lg sm:text-xl md:text-2xl">
+          {offerLabel ? `${offerLabel} ` : ""}অফার প্রাইজ{" "}
+          <span style={{ position: "relative", display: "inline-block", paddingBottom: 8 }}>
+            <span>৳ {price} টাকা মাত্র</span>
+            {squiggle}
+          </span>
+        </p>
+      )}
       <OrderButton style={{ marginBottom: 64 }} />
       <svg
         viewBox="0 0 283.5 27.8"

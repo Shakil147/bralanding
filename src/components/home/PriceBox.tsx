@@ -5,16 +5,18 @@ export default function PriceBox({
   price = 999,
   oldPrice = 1500,
   sizeOffers,
+  priceLabel,
 }: {
   price?: number;
   oldPrice?: number;
   sizeOffers?: SizePriceOffer[];
+  priceLabel?: string;
 }) {
   return (
     <section style={{ maxWidth: 1040, margin: "0 auto" }} className="px-4 sm:px-[22px] py-5 sm:py-[50px]">
       <div style={{ background: "#F0F6FD", border: "1px solid var(--accent, #FF4600)", borderRadius: 16, textAlign: "center" }} className="p-[5px] sm:px-[20px] sm:py-[20px]">
         <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: "0 0 16px" }} className="text-lg sm:text-xl md:text-[33px]">
-          রেগুলার প্রাইজ -{" "}
+          রেগুলার প্রাইস {priceLabel ? `${priceLabel} ` : "- "}
           <span style={{ position: "relative", display: "inline-block", color: "#3a3a3a" }}>
             <span style={{ fontFamily: HIND, fontWeight: 700 }}>{oldPrice}/- টাকা</span>
             <svg
@@ -29,7 +31,7 @@ export default function PriceBox({
           </span>
         </p>
         <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: 0 }} className="text-lg sm:text-xl md:text-[33px]">
-          এখন মাত্র{" "}
+          {priceLabel ? `অফার প্রাইজ ${priceLabel} ` : "এখন মাত্র "}
           {sizeOffers && sizeOffers.length > 0 ? (
             sizeOffers.map((o, i) => (
               <span key={o.label}>
@@ -55,7 +57,7 @@ export default function PriceBox({
             ))
           ) : (
             <span style={{ position: "relative", display: "inline-block" }}>
-              <span style={{ fontFamily: HIND, fontWeight: 700 }}>{price}/- টাকা মাত্র</span>
+              <span style={{ fontFamily: HIND, fontWeight: 700 }}>{price}{priceLabel ? "/=" : "/-"} টাকা মাত্র</span>
               <svg
                 viewBox="0 0 500 150"
                 preserveAspectRatio="none"
