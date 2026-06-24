@@ -26,6 +26,19 @@ export const IMPORTANT_POINTS = [
   "অর্ডার কনফার্ম করার জন্য আমাদের কল সেন্টার থেকে ফোন করে অর্ডার কনফার্ম করা হবে।",
 ];
 
+export const OFFERS = [
+  {
+    img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
+    title: "ইন্ডিয়ান লাইক মি ব্রা",
+    price: 999,
+  },
+  {
+    img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg",
+    title: "LuvLace Bra 3 pcs1",
+    price: 999,
+  },
+];
+
 export const SIZES = ["32", "34", "36", "38", "40", "42", "44"];
 
 export const SHIPPING_OPTS = [
