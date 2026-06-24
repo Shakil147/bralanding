@@ -54,9 +54,13 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
       "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg",
     video_id: "wEGRD2byTck",
     offers: [
-      { label: "৬ পিস কম্বো", price: 999, old_price: 1400, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
+      { label: "৬ পিস কম্বো", price: 999, old_price: 1500, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
       { label: "Likke Me Bra 2 pcs", price: 750, old_price: 950, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
       { label: "Likke Me Bra 4 pcs", price: 1250, old_price: 1800, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
+    ],
+    size_price_offers: [
+      { label: "৩২–৪০ সাইজের কম্বো", price: 999 },
+      { label: "৪২–৪৪ সাইজের কম্বো", price: 1099 },
     ],
     benefits: [
       "প্রিমিয়াম লেইস ফেব্রিক, ত্বকের জন্য নিরাপদ।",

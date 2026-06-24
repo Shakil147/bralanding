@@ -12,6 +12,11 @@ export type Offer = {
   color?: string;
 };
 
+export type SizePriceOffer = {
+  label: string;
+  price: number;
+};
+
 export type LandingPage = {
   slug: string;
   title: string;
@@ -19,6 +24,7 @@ export type LandingPage = {
   banner: string;
   video_id: string;
   offers: Offer[];
+  size_price_offers?: SizePriceOffer[];
   benefits: string[];
   why_buy: string[];
   important_points: string[];

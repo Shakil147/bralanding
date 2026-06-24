@@ -1,11 +1,14 @@
 import { HIND } from "./data";
+import { SizePriceOffer } from "@/lib/types";
 
 export default function PriceBox({
   price = 999,
   oldPrice = 1500,
+  sizeOffers,
 }: {
   price?: number;
   oldPrice?: number;
+  sizeOffers?: SizePriceOffer[];
 }) {
   return (
     <section style={{ maxWidth: 1040, margin: "0 auto" }} className="px-4 sm:px-[22px] py-5 sm:py-[50px]">
@@ -27,22 +30,32 @@ export default function PriceBox({
         </p>
         <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: 0 }} className="text-lg sm:text-xl md:text-[33px]">
           এখন মাত্র{" "}
-          <span style={{ position: "relative", display: "inline-block" }}>
-            <span style={{ fontFamily: HIND, fontWeight: 700 }}>{price}/- টাকা মাত্র</span>
-            <svg
-              viewBox="0 0 500 150"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-              style={{ position: "absolute", left: "50%", top: "50%", width: "calc(100% + 20px)", height: "calc(100% + 20px)", transform: "translate(-50%, -50%)", overflow: "visible" }}
-            >
-              <path
-                d="M3,146.1c17.1-8.8,33.5-17.8,51.4-17.8c15.6,0,17.1,18.1,30.2,18.1c22.9,0,36-18.6,53.9-18.6 c17.1,0,21.3,18.5,37.5,18.5c21.3,0,31.8-18.6,49-18.6c22.1,0,18.8,18.8,36.8,18.8c18.8,0,37.5-18.6,49-18.6c20.4,0,17.1,19,36.8,19 c22.9,0,36.8-20.6,54.7-18.6c17.7,1.4,7.1,19.5,33.5,18.8c17.1,0,47.2-6.5,61.1-15.6"
-                fill="none"
-                stroke="#00FF23"
-                strokeWidth="20"
-              />
-            </svg>
-          </span>
+          {sizeOffers && sizeOffers.length > 0 ? (
+            sizeOffers.map((o, i) => (
+              <span key={o.label} style={{ fontFamily: HIND, fontWeight: 700 }}>
+                {i > 0 ? " & " : ""}
+                {o.label} {o.price}/-
+              </span>
+            ))
+          ) : (
+            <span style={{ position: "relative", display: "inline-block" }}>
+              <span style={{ fontFamily: HIND, fontWeight: 700 }}>{price}/- টাকা মাত্র</span>
+              <svg
+                viewBox="0 0 500 150"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+                style={{ position: "absolute", left: "50%", top: "50%", width: "calc(100% + 20px)", height: "calc(100% + 20px)", transform: "translate(-50%, -50%)", overflow: "visible" }}
+              >
+                <path
+                  d="M3,146.1c17.1-8.8,33.5-17.8,51.4-17.8c15.6,0,17.1,18.1,30.2,18.1c22.9,0,36-18.6,53.9-18.6 c17.1,0,21.3,18.5,37.5,18.5c21.3,0,31.8-18.6,49-18.6c22.1,0,18.8,18.8,36.8,18.8c18.8,0,37.5-18.6,49-18.6c20.4,0,17.1,19,36.8,19 c22.9,0,36.8-20.6,54.7-18.6c17.7,1.4,7.1,19.5,33.5,18.8c17.1,0,47.2-6.5,61.1-15.6"
+                  fill="none"
+                  stroke="#00FF23"
+                  strokeWidth="20"
+                />
+              </svg>
+            </span>
+          )}
+          {sizeOffers && sizeOffers.length > 0 ? " টাকা মাত্র" : ""}
         </p>
       </div>
     </section>
