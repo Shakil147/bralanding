@@ -12,8 +12,12 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     banner:
       "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
     video_id: "wEGRD2byTck",
-    price: 999,
-    old_price: 1500,
+    offers: [
+      { label: "Guddi Bra 2 pcs", price: 750, old_price: 1000, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
+      { label: "Guddi Bra 3 pcs", price: 999, old_price: 1500, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
+      { label: "Guddi Bra 4 pcs", price: 1250, old_price: 1900, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
+      { label: "Guddi Bra 6 pcs", price: 1750, old_price: 2700, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
+    ],
     benefits: [
       "১০০% সুতি কাপড় রেগুলার ইউজের একদম পার্ফেক্ট।",
       "৪ হুকের ব্রা এবং মাঝারি ফিতা হওয়ায় কাধে এবং পিঠে ব্যথা হবেনা।",
@@ -49,8 +53,11 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     banner:
       "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg",
     video_id: "wEGRD2byTck",
-    price: 999,
-    old_price: 1400,
+    offers: [
+      { label: "Likke Me Bra 2 pcs", price: 750, old_price: 950, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
+      { label: "Likke Me Bra 3 pcs", price: 999, old_price: 1400, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
+      { label: "Likke Me Bra 4 pcs", price: 1250, old_price: 1800, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
+    ],
     benefits: [
       "প্রিমিয়াম লেইস ফেব্রিক, ত্বকের জন্য নিরাপদ।",
       "নন-ওয়্যার ডিজাইন, সারাদিন আরাম।",
@@ -82,8 +89,11 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     banner:
       "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
     video_id: "wEGRD2byTck",
-    price: 899,
-    old_price: 1300,
+    offers: [
+      { label: "Sports Bra 2 pcs", price: 650, old_price: 850, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
+      { label: "Sports Bra 3 pcs", price: 899, old_price: 1300, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
+      { label: "Sports Bra 4 pcs", price: 1100, old_price: 1650, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
+    ],
     benefits: [
       "হাই-ইম্প্যাক্ট সাপোর্ট, জিম ও দৌড়ের জন্য উপযুক্ত।",
       "শ্বাস নেওয়া যায় এমন কাপড়, ঘাম শোষণ করে।",
@@ -114,8 +124,11 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     banner:
       "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg",
     video_id: "wEGRD2byTck",
-    price: 949,
-    old_price: 1350,
+    offers: [
+      { label: "২ পিস কমফোর্ট ব্রা", price: 950, old_price: 1350, img: "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg" },
+      { label: "৩ পিস কমফোর্ট ব্রা", price: 1350, old_price: 1950, img: "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg" },
+      { label: "৪ পিস কমফোর্ট ব্রা", price: 1650, old_price: 2400, img: "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg" },
+    ],
     benefits: [
       "সফট ফোম কাপ, কোনো চাপ অনুভূত হবে না।",
       "ওয়্যার-ফ্রি ডিজাইন।",

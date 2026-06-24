@@ -8,22 +8,18 @@ import ShippingOptions from "./order/ShippingOptions";
 import SummaryRow from "./order/SummaryRow";
 import { createOrder } from "@/lib/api";
 import { trackEvent } from "@/lib/fbPixel";
-import { ShippingOption } from "@/lib/types";
+import { Offer, ShippingOption } from "@/lib/types";
 
 type Props = {
   slug?: string;
-  title?: string;
-  banner?: string;
-  price?: number;
+  offers?: Offer[];
   sizes?: string[];
   shippingOptions?: ShippingOption[];
 };
 
 export default function OrderForm({
   slug = "guddi-bra",
-  title = OFFERS[0].title,
-  banner = OFFERS[0].img,
-  price = OFFERS[0].price,
+  offers = OFFERS,
   sizes = SIZES,
   shippingOptions = SHIPPING_OPTS,
 }: Props) {
@@ -31,12 +27,14 @@ export default function OrderForm({
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [size, setSize] = useState(sizes[0]);
+  const [offerIdx, setOfferIdx] = useState(0);
   const [shipIdx, setShipIdx] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
 
+  const offer = offers[offerIdx];
   const shipping = shippingOptions[shipIdx].cost;
-  const total = price + shipping;
+  const total = offer.price + shipping;
 
   async function handleSubmit() {
     if (!name || !phone || !address || submitting) return;
@@ -50,6 +48,7 @@ export default function OrderForm({
         size,
         shipping_option: shippingOptions[shipIdx].label,
         quantity: 1,
+        offer_label: offer.label,
       });
       setOrderId(order.order_id);
       trackEvent("Purchase", { value: order.total, currency: "BDT", product_slug: slug });
@@ -63,7 +62,20 @@ export default function OrderForm({
       <div style={{ background: "#F0F6FD", borderStyle: "solid", borderWidth: "17px 5px 5px 5px", borderColor: "#F85606", borderRadius: 16 }} className="px-0 pt-[10px] pb-[10px] sm:px-[30px] sm:pt-[30px] sm:pb-[30px]">
         <h3 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 26px" }} className="text-xl sm:text-[25px]">আপনার পছন্দের অফারটি নির্বাচন করুন</h3>
 
-        <OfferOption img={banner} title={title} price={price} checked />
+        {offers.map((o, i) => (
+          <OfferOption
+            key={o.label}
+            img={o.img}
+            title={o.label}
+            price={o.price}
+            oldPrice={o.old_price}
+            checked={i === offerIdx}
+            onSelect={() => {
+              setOfferIdx(i);
+              trackEvent("InitiateCheckout", { value: o.price + shipping, currency: "BDT", product_slug: slug });
+            }}
+          />
+        ))}
 
         <div style={{ gap: 48 }} className="grid grid-cols-1 md:grid-cols-[1.05fr_.95fr] gap-8">
           {/* billing */}
@@ -92,7 +104,7 @@ export default function OrderForm({
               shipIdx={shipIdx}
               onChange={(i) => {
                 setShipIdx(i);
-                trackEvent("InitiateCheckout", { value: price + shippingOptions[i].cost, currency: "BDT", product_slug: slug });
+                trackEvent("InitiateCheckout", { value: offer.price + shippingOptions[i].cost, currency: "BDT", product_slug: slug });
               }}
               options={shippingOptions}
             />
@@ -101,14 +113,14 @@ export default function OrderForm({
           {/* order summary */}
           <div>
             <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 22px" }} className="text-2xl sm:text-[30px]">Your order</h4>
-            <SummaryRow label="Product" value={`৳ ${price}`} bold size={22} />
+            <SummaryRow label="Product" value={`৳ ${offer.price}`} bold size={22} />
             <div style={{ alignItems: "center", padding: "18px 0", borderBottom: "1px dashed #c5cfdb" }} className="flex flex-wrap gap-3 sm:flex-nowrap sm:gap-[18px]">
-              <img src={banner} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-14 h-16 sm:w-16 sm:h-[74px]" />
-              <span style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21 }} className="basis-full sm:basis-auto sm:flex-1">{title}</span>
+              <img src={offer.img} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-14 h-16 sm:w-16 sm:h-[74px]" />
+              <span style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21 }} className="basis-full sm:basis-auto sm:flex-1">{offer.label}</span>
               <span style={{ fontFamily: HIND, fontSize: 20, color: "#555" }}>× 1</span>
-              <span style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21, marginLeft: "auto" }} className="sm:ml-0">৳ {price}</span>
+              <span style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21, marginLeft: "auto" }} className="sm:ml-0">৳ {offer.price}</span>
             </div>
-            <SummaryRow label="Subtotal" value={`৳ ${price}`} bold />
+            <SummaryRow label="Subtotal" value={`৳ ${offer.price}`} bold />
             <SummaryRow label="Shipping" value={`৳ ${shipping}`} />
             <SummaryRow label="Total" value={`৳ ${total}`} bold size={24} dashed={false} />
 

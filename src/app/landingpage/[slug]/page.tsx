@@ -30,21 +30,21 @@ export default async function LandingPage({ params }: Params) {
 
   if (!page) notFound();
 
+  const defaultOffer = page.offers[0];
+
   return (
     <div style={{ background: "#f7f9fc", width: "100%", overflowX: "hidden", color: "#222" }}>
-      <ViewContentTracker slug={page.slug} price={page.price} />
-      <Header title={page.title} subtitle={page.subtitle} price={page.price} />
+      <ViewContentTracker slug={page.slug} price={defaultOffer.price} />
+      <Header title={page.title} subtitle={page.subtitle} price={defaultOffer.price} />
       <VideoSection videoId={page.video_id} title={page.title} />
       <BenefitsSection title={`${page.title} ব্যবহারে যেসব সুবিধা পাবেন:`} benefits={page.benefits} banner={page.banner} />
-      <PriceBox price={page.price} oldPrice={page.old_price} />
+      <PriceBox price={defaultOffer.price} oldPrice={defaultOffer.old_price} />
       <WhyBuySection whyBuy={page.why_buy} image={page.banner} />
       <QualitySection gallery={page.gallery} />
       <ImportantPoints points={page.important_points} phone={page.phone} />
       <OrderForm
         slug={page.slug}
-        title={page.title}
-        banner={page.banner}
-        price={page.price}
+        offers={page.offers}
         sizes={page.sizes}
         shippingOptions={page.shipping_options}
       />

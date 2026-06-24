@@ -29,13 +29,15 @@ export const IMPORTANT_POINTS = [
 export const OFFERS = [
   {
     img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
-    title: "ইন্ডিয়ান লাইক মি ব্রা",
-    price: 999,
+    label: "ইন্ডিয়ান লাইক মি ব্রা 2 pcs",
+    price: 750,
+    old_price: 1000,
   },
   {
     img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg",
-    title: "LuvLace Bra 3 pcs1",
+    label: "LuvLace Bra 3 pcs",
     price: 999,
+    old_price: 1500,
   },
 ];
 

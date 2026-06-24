@@ -3,14 +3,22 @@ export type ShippingOption = {
   cost: number;
 };
 
+export type Offer = {
+  label: string;
+  price: number;
+  old_price?: number;
+  img: string;
+  size?: string;
+  color?: string;
+};
+
 export type LandingPage = {
   slug: string;
   title: string;
   subtitle: string;
   banner: string;
   video_id: string;
-  price: number;
-  old_price: number;
+  offers: Offer[];
   benefits: string[];
   why_buy: string[];
   important_points: string[];
@@ -30,6 +38,7 @@ export type OrderPayload = {
   size: string;
   shipping_option: string;
   quantity: number;
+  offer_label: string;
 };
 
 export type OrderResponse = {

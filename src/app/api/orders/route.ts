@@ -9,6 +9,7 @@ const REQUIRED_FIELDS: (keyof OrderPayload)[] = [
   "address",
   "size",
   "shipping_option",
+  "offer_label",
 ];
 
 /**
@@ -34,7 +35,11 @@ export async function POST(req: NextRequest) {
   const shipping = product.shipping_options.find(
     (opt) => opt.label === body.shipping_option
   );
-  const total = product.price + (shipping?.cost ?? 0);
+  const offer = product.offers.find((o) => o.label === body.offer_label);
+  if (!offer) {
+    return NextResponse.json({ error: "invalid_offer" }, { status: 422 });
+  }
+  const total = offer.price + (shipping?.cost ?? 0);
 
   const response: OrderResponse = {
     order_id: `ORD-${Date.now()}`,
