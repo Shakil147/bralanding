@@ -112,6 +112,19 @@ export default function OrderForm({
             )}
             <FormField label="সম্পূর্ন ঠিকানা" value={address} onChange={setAddress} placeholder="সম্পূর্ন ঠিকানা" />
 
+            <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, fontSize: 20, color: "#333", marginBottom: 8 }}>
+              সাইজ সিলেক্ট করুন <span style={{ color: "#e23b1f" }}>*</span>
+            </label>
+            <select
+              value={size}
+              onChange={(e) => setSize(e.target.value)}
+              style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 30, outline: "none" }}
+            >
+              {sizes.map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+
             {hasColor && (
               <FormField label="কালার লিখুন (optional)" value={color} onChange={setColor} placeholder="কালার লিখুন" required={false} />
             )}
@@ -126,23 +139,13 @@ export default function OrderForm({
                   onChange={(e) => setNote(e.target.value)}
                   placeholder="Order notes"
                   rows={3}
-                  style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 22, outline: "none", resize: "vertical" }}
+                  style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 8, outline: "none", resize: "vertical" }}
                 />
+                <p style={{ fontFamily: HIND, fontSize: 14, color: "#777", margin: "0 0 22px" }}>
+                  Notes about your order, e.g. special notes for delivery.
+                </p>
               </>
             )}
-
-            <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, fontSize: 20, color: "#333", marginBottom: 8 }}>
-              সাইজ সিলেক্ট করুন <span style={{ color: "#e23b1f" }}>*</span>
-            </label>
-            <select
-              value={size}
-              onChange={(e) => setSize(e.target.value)}
-              style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 30, outline: "none" }}
-            >
-              {sizes.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
 
             <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 18px" }} className="text-2xl sm:text-[30px]">Shipping</h4>
             <ShippingOptions
