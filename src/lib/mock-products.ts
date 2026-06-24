@@ -158,3 +158,7 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
 export function getMockLandingPage(slug: string): LandingPage | null {
   return MOCK_LANDING_PAGES[slug] ?? null;
 }
+
+export function getMockLandingPages(): LandingPage[] {
+  return Object.values(MOCK_LANDING_PAGES);
+}

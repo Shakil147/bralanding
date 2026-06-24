@@ -20,6 +20,10 @@ export function getLandingPage(slug: string): Promise<LandingPage> {
   return apiFetch<LandingPage>(`/landingpages/${slug}`, { cache: "no-store" });
 }
 
+export function getLandingPages(): Promise<LandingPage[]> {
+  return apiFetch<LandingPage[]>("/landingpages", { cache: "no-store" });
+}
+
 export function createOrder(payload: OrderPayload): Promise<OrderResponse> {
   return apiFetch<OrderResponse>("/orders", {
     method: "POST",
