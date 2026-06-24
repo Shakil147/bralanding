@@ -13,7 +13,7 @@ export default function Header({
   offerLabel?: string;
 }) {
   return (
-    <header style={{ position: "relative", background: "#f85606" }} className="text-center px-4 pt-10 sm:px-5 sm:pt-[54px]">
+    <header style={{ position: "relative", background: "var(--accent, #f85606)" }} className="text-center px-4 pt-10 sm:px-5 sm:pt-[54px]">
       <h1
         style={{ fontFamily: HIND, fontWeight: 800, color: "#FFFFFF", lineHeight: 1, margin: "20px 0 0", padding: 0, textShadow: "0 2px 6px rgba(0,0,0,.12)" }}
         className="text-4xl sm:text-5xl md:text-[80px]"

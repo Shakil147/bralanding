@@ -59,7 +59,7 @@ export default function OrderForm({
 
   return (
     <section id="order" style={{ maxWidth: 1140, margin: "46px auto 70px" }} className="px-4 sm:px-[22px]">
-      <div style={{ background: "#F0F6FD", borderStyle: "solid", borderWidth: "17px 5px 5px 5px", borderColor: "#F85606", borderRadius: 16 }} className="px-0 pt-[10px] pb-[10px] sm:px-[30px] sm:pt-[30px] sm:pb-[30px]">
+      <div style={{ background: "#F0F6FD", borderStyle: "solid", borderWidth: "17px 5px 5px 5px", borderColor: "var(--accent, #F85606)", borderRadius: 16 }} className="px-0 pt-[10px] pb-[10px] sm:px-[30px] sm:pt-[30px] sm:pb-[30px]">
         <h3 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 26px" }} className="text-xl sm:text-[25px]">আপনার পছন্দের অফারটি নির্বাচন করুন</h3>
 
         {offers.map((o, i) => (
@@ -138,7 +138,7 @@ export default function OrderForm({
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: HIND, fontWeight: 700, color: "#fff", background: "#f85606", border: "none", borderRadius: 12, padding: 18, cursor: submitting ? "default" : "pointer", boxShadow: "0 5px 0 rgba(0,0,0,.12)", opacity: submitting ? 0.7 : 1 }}
+                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: HIND, fontWeight: 700, color: "#fff", background: "var(--accent, #f85606)", border: "none", borderRadius: 12, padding: 18, cursor: submitting ? "default" : "pointer", boxShadow: "0 5px 0 rgba(0,0,0,.12)", opacity: submitting ? 0.7 : 1 }}
                 className="text-xl sm:text-2xl"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>

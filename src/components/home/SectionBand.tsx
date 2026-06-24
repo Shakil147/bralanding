@@ -16,7 +16,7 @@ export default function SectionBand({
   shapeDivider?: boolean;
 }) {
   return (
-    <div style={{ background: "#f85606", textAlign: "center", position: "relative", ...style }} className={className ?? "px-4 py-5 sm:px-5"}>
+    <div style={{ background: "var(--accent, #f85606)", textAlign: "center", position: "relative", ...style }} className={className ?? "px-4 py-5 sm:px-5"}>
       <h2 style={{ fontFamily: HIND, fontWeight: 800, color: "#fff", lineHeight: 1.2, margin: 0, ...textStyle }} className={textClassName}>
         {children}
       </h2>

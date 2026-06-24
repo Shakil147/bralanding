@@ -17,10 +17,10 @@ export default function OfferOption({
 }) {
   return (
     <label
-      style={{ display: "flex", alignItems: "center", background: checked ? "#fff7f2" : "#fff", border: checked ? "1px solid #f85606" : "1px solid #e3e8ef", borderRadius: 12, marginBottom: 16, cursor: "pointer" }}
+      style={{ display: "flex", alignItems: "center", background: checked ? "#fff7f2" : "#fff", border: checked ? "1px solid var(--accent, #f85606)" : "1px solid #e3e8ef", borderRadius: 12, marginBottom: 16, cursor: "pointer" }}
       className="flex-wrap gap-3 sm:gap-[22px] px-4 py-4 sm:px-6 sm:py-[18px]"
     >
-      <input type="radio" name="offer" checked={checked} onChange={onSelect} style={{ width: 22, height: 22, accentColor: "#f85606" }} />
+      <input type="radio" name="offer" checked={checked} onChange={onSelect} style={{ width: 22, height: 22, accentColor: "var(--accent, #f85606)" }} />
       <img src={img} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-16 h-[72px] sm:w-[84px] sm:h-[96px]" />
       <span style={{ fontFamily: HIND, fontWeight: 600, color: "#222", fontSize: "1em", lineHeight: 1.5 }} className="text-lg sm:text-2xl">
         {title}

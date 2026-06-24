@@ -12,6 +12,11 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     banner:
       "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
     video_id: "wEGRD2byTck",
+    accent_color: "#f85606",
+    seo_title: "গুড্ডি ব্রা - ১০০% সুতি কম্বো অফার | Narimon Closet",
+    seo_description: "১০০% সুতি কাপড়ের গুড্ডি ব্রা কম্বো অফার। ক্যাশ অন ডেলিভারিতে অর্ডার করুন।",
+    seo_keywords: ["গুড্ডি ব্রা", "bra combo offer", "narimon closet"],
+    canonical: "https://narimoncloset.com/landingpage/guddi-bra",
     offers: [
       { label: "Guddi Bra 2 pcs", price: 750, old_price: 1000, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
       { label: "Guddi Bra 3 pcs", price: 999, old_price: 1500, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
@@ -53,6 +58,11 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     banner:
       "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg",
     video_id: "wEGRD2byTck",
+    accent_color: "#d6336c",
+    seo_title: "ইন্ডিয়ান লাইক মি ব্রা - ৬ পিস কম্বো অফার | Narimon Closet",
+    seo_description: "নরম, আরামদায়ক লাইক মি ব্রা ৬ পিস কম্বো অফার। ক্যাশ অন ডেলিভারিতে অর্ডার করুন।",
+    seo_keywords: ["লাইক মি ব্রা", "bra combo offer", "narimon closet"],
+    canonical: "https://narimoncloset.com/landingpage/likke-me-bra",
     offers: [
       { label: "৬ পিস কম্বো", price: 999, old_price: 1500, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
       { label: "Likke Me Bra 2 pcs", price: 750, old_price: 950, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
@@ -93,6 +103,11 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     banner:
       "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
     video_id: "wEGRD2byTck",
+    accent_color: "#1d7a3a",
+    seo_title: "স্পোর্টস ব্রা - হাই ইম্প্যাক্ট সাপোর্ট কম্বো অফার | Narimon Closet",
+    seo_description: "জিম ও দৌড়ের জন্য পার্ফেক্ট স্পোর্টস ব্রা কম্বো অফার। ক্যাশ অন ডেলিভারিতে অর্ডার করুন।",
+    seo_keywords: ["স্পোর্টস ব্রা", "sports bra", "narimon closet"],
+    canonical: "https://narimoncloset.com/landingpage/sports-bra",
     offers: [
       { label: "Sports Bra 2 pcs", price: 650, old_price: 850, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
       { label: "Sports Bra 3 pcs", price: 899, old_price: 1300, img: "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" },
@@ -128,6 +143,11 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     banner:
       "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg",
     video_id: "wEGRD2byTck",
+    accent_color: "#5f3dc4",
+    seo_title: "কমফোর্ট ব্রা - সফট ফোম কাপ কম্বো অফার | Narimon Closet",
+    seo_description: "সারাদিন আরামে থাকার জন্য কমফোর্ট ব্রা কম্বো অফার। ক্যাশ অন ডেলিভারিতে অর্ডার করুন।",
+    seo_keywords: ["কমফোর্ট ব্রা", "comfort bra", "narimon closet"],
+    canonical: "https://narimoncloset.com/landingpage/comfort-bra",
     offers: [
       { label: "২ পিস কমফোর্ট ব্রা", price: 950, old_price: 1350, img: "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg" },
       { label: "৩ পিস কমফোর্ট ব্রা", price: 1350, old_price: 1950, img: "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg" },

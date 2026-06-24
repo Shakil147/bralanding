@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Header from "@/components/home/Header";
 import VideoSection from "@/components/home/VideoSection";
 import BenefitsSection from "@/components/home/BenefitsSection";
@@ -18,9 +19,15 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const page = await getLandingPage(slug).catch(() => null);
   if (!page) return {};
+  const title = page.seo_title ?? `${page.title} — Narimon Closet`;
+  const description = page.seo_description ?? page.subtitle;
+  const ogImage = page.og_image ?? page.banner;
   return {
-    title: `${page.title} — Narimon Closet`,
-    description: page.subtitle,
+    title,
+    description,
+    keywords: page.seo_keywords,
+    alternates: page.canonical ? { canonical: page.canonical } : undefined,
+    openGraph: { title, description, images: [ogImage] },
   };
 }
 
@@ -33,7 +40,7 @@ export default async function LandingPage({ params }: Params) {
   const defaultOffer = page.offers[0];
 
   return (
-    <div style={{ background: "#f7f9fc", width: "100%", overflowX: "hidden", color: "#222" }}>
+    <div style={{ background: "#f7f9fc", width: "100%", overflowX: "hidden", color: "#222", ...(page.accent_color ? { "--accent": page.accent_color } as CSSProperties : {}) }}>
       <ViewContentTracker slug={page.slug} price={defaultOffer.price} />
       <Header title={page.title} subtitle={page.subtitle} price={defaultOffer.price} offerLabel={defaultOffer.label} />
       <VideoSection videoId={page.video_id} title={page.title} />

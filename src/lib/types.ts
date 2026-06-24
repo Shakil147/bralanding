@@ -25,6 +25,12 @@ export type LandingPage = {
   video_id: string;
   offers: Offer[];
   size_price_offers?: SizePriceOffer[];
+  accent_color?: string;
+  seo_title?: string;
+  seo_description?: string;
+  seo_keywords?: string[];
+  og_image?: string;
+  canonical?: string;
   benefits: string[];
   why_buy: string[];
   important_points: string[];

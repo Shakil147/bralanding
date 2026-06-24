@@ -22,7 +22,7 @@ export default function ShippingOptions({
             name="ship"
             checked={shipIdx === i}
             onChange={() => onChange(i)}
-            style={{ width: 18, height: 18, accentColor: "#f85606", flexShrink: 0 }}
+            style={{ width: 18, height: 18, accentColor: "var(--accent, #f85606)", flexShrink: 0 }}
           />
           <span style={{ flex: 1, minWidth: 0 }} className="break-words">{opt.label}</span>
           <span style={{ fontWeight: 600, flexShrink: 0 }} className="whitespace-nowrap">৳ {opt.cost}</span>
