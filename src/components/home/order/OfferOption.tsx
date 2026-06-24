@@ -18,10 +18,10 @@ export default function OfferOption({
     >
       <input type="radio" name="offer" checked={checked} readOnly style={{ width: 22, height: 22, accentColor: "#f85606" }} />
       <img src={img} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-16 h-[72px] sm:w-[84px] sm:h-[96px]" />
-      <span style={{ fontFamily: HIND, fontWeight: 600, color: "#222" }} className="text-lg sm:text-2xl">
+      <span style={{ fontFamily: HIND, fontWeight: 600, color: "#222", fontSize: "1em", lineHeight: 1.5 }} className="text-lg sm:text-2xl">
         {title}
       </span>
-      <span style={{ marginLeft: "auto", fontFamily: HIND, fontWeight: 600, color: "#222" }} className="text-lg sm:text-2xl">
+      <span style={{ marginLeft: "auto", fontFamily: HIND, fontWeight: 600, color: "#222", fontSize: "1em", lineHeight: 1.5 }} className="text-lg sm:text-2xl">
         ৳{price.toFixed(2)}
       </span>
     </label>
