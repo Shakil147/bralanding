@@ -42,7 +42,6 @@ export type LandingPage = {
   shipping_options: ShippingOption[];
   gallery: string[];
   reviews?: string[];
-  fb_pixel_id: string;
   whatsapp: string;
   phone: string;
 };
