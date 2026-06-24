@@ -15,12 +15,12 @@ export default function OrderForm() {
 
   return (
     <section id="order" style={{ maxWidth: 1140, margin: "46px auto 70px" }} className="px-4 sm:px-[22px]">
-      <div style={{ background: "#eef5fd", border: "5px solid #f85606", borderRadius: 18 }} className="px-5 pt-7 pb-8 sm:px-10 sm:pt-[38px] sm:pb-[46px]">
-        <h3 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 26px" }} className="text-2xl sm:text-3xl">আপনার পছন্দের অফারটি নির্বাচন করুন</h3>
+      <div style={{ background: "#F0F6FD", borderStyle: "solid", borderWidth: "17px 5px 5px 5px", borderColor: "#F85606", borderRadius: 16 }} className="px-0 pt-[10px] pb-[10px] sm:px-[30px] sm:pt-[30px] sm:pb-[30px]">
+        <h3 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 26px" }} className="text-xl sm:text-[25px]">আপনার পছন্দের অফারটি নির্বাচন করুন</h3>
 
         <label style={{ display: "flex", alignItems: "center", background: "#fff", border: "1px solid #e3e8ef", borderRadius: 12, marginBottom: 30, cursor: "pointer" }} className="flex-wrap gap-3 sm:gap-[22px] px-4 py-4 sm:px-6 sm:py-[18px]">
           <input type="radio" name="offer" checked readOnly style={{ width: 22, height: 22, accentColor: "#f85606" }} />
-          <img src="/assets/prod.png" alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-16 h-[72px] sm:w-[84px] sm:h-[96px]" />
+          <img src="https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-16 h-[72px] sm:w-[84px] sm:h-[96px]" />
           <span style={{ fontFamily: HIND, fontWeight: 600, color: "#222" }} className="text-lg sm:text-2xl">
             ইন্ডিয়ান লাইক মি ব্রা <span style={{ fontWeight: 500 }}>× 1</span>
           </span>
