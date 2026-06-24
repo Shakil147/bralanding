@@ -5,10 +5,12 @@ export default function Header({
   title = "ইন্ডিয়ান লাইক মি ব্রা",
   subtitle = "গরমে শীতল অনুভূতি!",
   price = 999,
+  offerLabel,
 }: {
   title?: string;
   subtitle?: string;
   price?: number;
+  offerLabel?: string;
 }) {
   return (
     <header style={{ position: "relative", background: "#f85606" }} className="text-center px-4 pt-10 sm:px-5 sm:pt-[54px]">
@@ -22,7 +24,7 @@ export default function Header({
         {subtitle}
       </p>
       <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "0 0 30px" }} className="text-lg sm:text-xl md:text-2xl">
-        অফার প্রাইজ{" "}
+        {offerLabel ? `${offerLabel} ` : ""}অফার প্রাইজ{" "}
         <span style={{ position: "relative", display: "inline-block", paddingBottom: 8 }}>
           <span>৳ {price} টাকা মাত্র</span>
           <svg

@@ -48,14 +48,14 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
   },
   "likke-me-bra": {
     slug: "likke-me-bra",
-    title: "লাইক মি ব্রা",
+    title: "ইন্ডিয়ান লাইক মি ব্রা",
     subtitle: "নরম, আরামদায়ক, দীর্ঘস্থায়ী!",
     banner:
       "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg",
     video_id: "wEGRD2byTck",
     offers: [
+      { label: "৬ পিস কম্বো", price: 999, old_price: 1400, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
       { label: "Likke Me Bra 2 pcs", price: 750, old_price: 950, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
-      { label: "Likke Me Bra 3 pcs", price: 999, old_price: 1400, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
       { label: "Likke Me Bra 4 pcs", price: 1250, old_price: 1800, img: "https://narimoncloset.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg" },
     ],
     benefits: [

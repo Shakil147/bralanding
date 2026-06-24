@@ -35,7 +35,7 @@ export default async function LandingPage({ params }: Params) {
   return (
     <div style={{ background: "#f7f9fc", width: "100%", overflowX: "hidden", color: "#222" }}>
       <ViewContentTracker slug={page.slug} price={defaultOffer.price} />
-      <Header title={page.title} subtitle={page.subtitle} price={defaultOffer.price} />
+      <Header title={page.title} subtitle={page.subtitle} price={defaultOffer.price} offerLabel={defaultOffer.label} />
       <VideoSection videoId={page.video_id} title={page.title} />
       <BenefitsSection title={`${page.title} ব্যবহারে যেসব সুবিধা পাবেন:`} benefits={page.benefits} banner={page.banner} />
       <PriceBox price={defaultOffer.price} oldPrice={defaultOffer.old_price} />
