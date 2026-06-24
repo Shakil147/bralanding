@@ -5,13 +5,13 @@ export default function Header() {
   return (
     <header style={{ position: "relative", background: "#f85606" }} className="text-center px-4 pt-10 sm:px-5 sm:pt-[54px]">
       <h1
-        style={{ fontFamily: HIND, fontWeight: 700, color: "#fff", lineHeight: 1.1, margin: "0 0 18px", textShadow: "0 2px 6px rgba(0,0,0,.12)" }}
-        className="text-4xl sm:text-5xl md:text-[60px]"
+        style={{ fontFamily: HIND, fontWeight: 800, color: "#FFFFFF", lineHeight: 1, margin: "20px 0 0", padding: 0, textShadow: "0 2px 6px rgba(0,0,0,.12)" }}
+        className="text-4xl sm:text-5xl md:text-[80px]"
       >
         ইন্ডিয়ান লাইক মি ব্রা
       </h1>
-      <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "0 0 18px" }} className="text-lg sm:text-xl md:text-2xl">
-        অস্বস্তির সাথে ব্রেকআপ
+      <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "18px 0 18px" }} className="text-lg sm:text-xl md:text-2xl">
+        গরমে শীতল অনুভূতি!
       </p>
       <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "0 0 30px" }} className="text-lg sm:text-xl md:text-2xl">
         ৬ পিস কম্বো অফার প্রাইজ{" "}

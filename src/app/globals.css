@@ -3,12 +3,20 @@
 :root {
   --background: #f7f9fc;
   --foreground: #222222;
+  --container-max-width: 1140px;
+  --content-width: min(100%, var(--container-max-width));
+}
+
+@media (max-width: 767px) {
+  :root {
+    --container-max-width: 767px;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-hind-siliguri);
+  --font-sans: sans-serif;
 }
 
 * {
@@ -19,5 +27,5 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-hind-siliguri), sans-serif;
+  font-family: sans-serif;
 }

@@ -1,24 +1,26 @@
-import { BENEFITS, NOTO } from "./data";
+import { BENEFITS } from "./data";
 import SectionBand from "./SectionBand";
 
 export default function BenefitsSection() {
   return (
     <>
-      <SectionBand shapeDivider style={{ marginBottom: 8, paddingBottom: 39 }} textStyle={{ maxWidth: 980, marginLeft: "auto", marginRight: "auto" }}>
+      <SectionBand shapeDivider style={{ marginBottom: 8, paddingBottom: 39 }} textStyle={{ maxWidth: 980, marginLeft: "auto", marginRight: "auto" }} textClassName="text-[35px] md:text-[60px]">
         ইন্ডিয়ান লাইক মি ব্রা ব্যবহারে যেসব সুবিধা পাবেন:
       </SectionBand>
 
       <section style={{ maxWidth: 1080, margin: "0 auto", alignItems: "start" }} className="grid grid-cols-1 md:grid-cols-[1.05fr_.95fr] gap-6 md:gap-10 px-4 py-6 sm:px-[22px] sm:py-[34px]">
         <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 20 }}>
           {BENEFITS.map((b) => (
-            <li key={b} style={{ display: "flex", gap: 14, alignItems: "flex-start", fontFamily: NOTO, fontWeight: 600, lineHeight: 1.4, color: "#1d1d1d" }} className="text-base sm:text-lg md:text-xl">
-              <span style={{ color: "#f85606", fontWeight: 700, fontSize: 20, lineHeight: 1.5, flexShrink: 0 }}>»</span>
+            <li key={b} style={{ display: "flex", gap: 14, alignItems: "flex-start", fontFamily: "sans-serif", fontWeight: 600, lineHeight: 1.4, color: "#1d1d1d" }} className="text-[18px] md:text-[27px]">
+              <svg aria-hidden="true" viewBox="0 0 512 512" style={{ fill: "#F85606", height: "1em", width: "1em", margin: "0 0.25em 0 0", flexShrink: 0 }}>
+                <path d="M505 174.8l-39.6-39.6c-9.4-9.4-24.6-9.4-33.9 0L192 374.7 80.6 263.2c-9.4-9.4-24.6-9.4-33.9 0L7 302.9c-9.4 9.4-9.4 24.6 0 34L175 505c9.4 9.4 24.6 9.4 33.9 0l296-296.2c9.4-9.5 9.4-24.7.1-34zm-324.3 106c6.2 6.3 16.4 6.3 22.6 0l208-208.2c6.2-6.3 6.2-16.4 0-22.6L366.1 4.7c-6.2-6.3-16.4-6.3-22.6 0L192 156.2l-55.4-55.5c-6.2-6.3-16.4-6.3-22.6 0L68.7 146c-6.2 6.3-6.2 16.4 0 22.6l112 112.2z" />
+              </svg>
               <span>{b}</span>
             </li>
           ))}
         </ul>
         <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 8px 26px rgba(0,0,0,.12)", alignSelf: "center" }}>
-          <img src="/assets/group1.png" alt="পণ্য" style={{ display: "block", width: "100%", height: "auto" }} />
+          <img src="https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg" alt="পণ্য" style={{ display: "block", width: "100%", height: "auto" }} />
         </div>
       </section>
     </>

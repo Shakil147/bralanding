@@ -1,4 +1,4 @@
-export const HIND = "var(--font-hind-siliguri), sans-serif";
+export const HIND = "sans-serif";
 export const NOTO = "var(--font-noto-serif-bengali), serif";
 
 export const BENEFITS = [
@@ -35,13 +35,17 @@ export const SHIPPING_OPTS = [
 
 export const ORANGE_BTN: React.CSSProperties = {
   display: "inline-block",
+  // width: "100%",
   fontFamily: HIND,
+  fontSize: 40,
   fontWeight: 500,
   color: "#fff",
+  fill: "#fff",
   textDecoration: "none",
   background: "#FF4600",
-  border: "1px solid #000000",
+  border: "1px solid #fffdfd",
   borderRadius: "30px 0px 30px 0px",
+  boxShadow: "none",
 };
 
-export const ORANGE_BTN_CLASS = "text-2xl sm:text-3xl md:text-[40px] px-7 py-3 sm:px-10 sm:py-3.5";
+export const ORANGE_BTN_CLASS = "px-12 py-0 sm:px-10 sm:py-3.5";
