@@ -1,22 +1,30 @@
 import { HIND } from "./data";
 import OrderButton from "./OrderButton";
 
-export default function Header() {
+export default function Header({
+  title = "ইন্ডিয়ান লাইক মি ব্রা",
+  subtitle = "গরমে শীতল অনুভূতি!",
+  price = 999,
+}: {
+  title?: string;
+  subtitle?: string;
+  price?: number;
+}) {
   return (
     <header style={{ position: "relative", background: "#f85606" }} className="text-center px-4 pt-10 sm:px-5 sm:pt-[54px]">
       <h1
         style={{ fontFamily: HIND, fontWeight: 800, color: "#FFFFFF", lineHeight: 1, margin: "20px 0 0", padding: 0, textShadow: "0 2px 6px rgba(0,0,0,.12)" }}
         className="text-4xl sm:text-5xl md:text-[80px]"
       >
-        ইন্ডিয়ান লাইক মি ব্রা
+        {title}
       </h1>
       <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "18px 0 18px" }} className="text-lg sm:text-xl md:text-2xl">
-        গরমে শীতল অনুভূতি!
+        {subtitle}
       </p>
       <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "0 0 30px" }} className="text-lg sm:text-xl md:text-2xl">
-        ৬ পিস কম্বো অফার প্রাইজ{" "}
+        অফার প্রাইজ{" "}
         <span style={{ position: "relative", display: "inline-block", paddingBottom: 8 }}>
-          <span>৯৯৯ /- টাকা মাত্র</span>
+          <span>৳ {price} টাকা মাত্র</span>
           <svg
             viewBox="0 0 500 150"
             preserveAspectRatio="none"

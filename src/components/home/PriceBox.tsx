@@ -1,13 +1,19 @@
 import { HIND } from "./data";
 
-export default function PriceBox() {
+export default function PriceBox({
+  price = 999,
+  oldPrice = 1500,
+}: {
+  price?: number;
+  oldPrice?: number;
+}) {
   return (
     <section style={{ maxWidth: 1040, margin: "0 auto" }} className="px-4 sm:px-[22px] py-5 sm:py-[50px]">
       <div style={{ background: "#F0F6FD", border: "1px solid #FF4600", borderRadius: 16, textAlign: "center" }} className="p-[5px] sm:px-[20px] sm:py-[20px]">
         <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: "0 0 16px" }} className="text-lg sm:text-xl md:text-[33px]">
-          ৬ পিস কম্বো রেগুলার প্রাইজ -{" "}
+          রেগুলার প্রাইজ -{" "}
           <span style={{ position: "relative", display: "inline-block", color: "#3a3a3a" }}>
-            <span style={{ fontFamily: HIND, fontWeight: 700 }}>১৫০০/- টাকা</span>
+            <span style={{ fontFamily: HIND, fontWeight: 700 }}>{oldPrice}/- টাকা</span>
             <svg
               viewBox="0 0 500 150"
               preserveAspectRatio="none"
@@ -20,9 +26,9 @@ export default function PriceBox() {
           </span>
         </p>
         <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: 0 }} className="text-lg sm:text-xl md:text-[33px]">
-          ৩২–৪০ সাইজের কম্বো ৯৯৯/- &amp; ৪২–৪৪ সাইজের কম্বো{" "}
+          এখন মাত্র{" "}
           <span style={{ position: "relative", display: "inline-block" }}>
-            <span style={{ fontFamily: HIND, fontWeight: 700 }}>১০৯৯/- টাকা মাত্র</span>
+            <span style={{ fontFamily: HIND, fontWeight: 700 }}>{price}/- টাকা মাত্র</span>
             <svg
               viewBox="0 0 500 150"
               preserveAspectRatio="none"

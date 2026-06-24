@@ -1,4 +1,8 @@
-export default function FloatingButtons() {
+export default function FloatingButtons({
+  whatsapp = "8801713536549",
+}: {
+  whatsapp?: string;
+}) {
   return (
     <>
       <a href="#" style={{ position: "fixed", borderRadius: "50%", background: "#0084ff", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 18px rgba(0,0,0,.25)", zIndex: 50 }} className="right-4 bottom-[88px] w-12 h-12 sm:right-[26px] sm:bottom-[104px] sm:w-[62px] sm:h-[62px]">
@@ -6,7 +10,7 @@ export default function FloatingButtons() {
           <path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.14.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.99-.88c.17-.07.36-.09.54-.04 .91.25 1.88.39 2.8.39 5.64 0 10-4.13 10-9.7C22 6.13 17.64 2 12 2Zm6 7.46-2.93 4.65c-.47.74-1.47.93-2.17.41l-2.33-1.75a.6.6 0 0 0-.72 0l-3.16 2.4c-.42.32-.97-.18-.68-.62l2.93-4.65c.47-.74 1.47-.93 2.17-.41l2.33 1.75a.6.6 0 0 0 .72 0l3.15-2.4c.42-.32.97.18.69.62Z" />
         </svg>
       </a>
-      <a href="https://wa.me/8801713536549" style={{ position: "fixed", borderRadius: "50%", background: "#25d366", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 18px rgba(0,0,0,.25)", zIndex: 50 }} className="right-4 bottom-4 w-12 h-12 sm:right-[26px] sm:bottom-[30px] sm:w-[62px] sm:h-[62px]">
+      <a href={`https://wa.me/${whatsapp}`} style={{ position: "fixed", borderRadius: "50%", background: "#25d366", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 18px rgba(0,0,0,.25)", zIndex: 50 }} className="right-4 bottom-4 w-12 h-12 sm:right-[26px] sm:bottom-[30px] sm:w-[62px] sm:h-[62px]">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="#fff" className="w-7 h-7 sm:w-9 sm:h-9">
           <path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35ZM12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.07L2 22l5.05-1.32A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18.18c-1.66 0-3.2-.49-4.5-1.32l-.32-.2-3 .78.8-2.92-.21-.33A8.13 8.13 0 0 1 3.82 12 8.18 8.18 0 1 1 12 20.18Z" />
         </svg>

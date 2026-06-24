@@ -3,13 +3,15 @@ import { HIND, SHIPPING_OPTS } from "../data";
 export default function ShippingOptions({
   shipIdx,
   onChange,
+  options = SHIPPING_OPTS,
 }: {
   shipIdx: number;
   onChange: (index: number) => void;
+  options?: { label: string; cost: number }[];
 }) {
   return (
     <div style={{ border: "1px solid #d9e1ea", borderRadius: 8, overflow: "hidden" }}>
-      {SHIPPING_OPTS.map((opt, i) => (
+      {options.map((opt, i) => (
         <label
           key={opt.label}
           style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 18px", borderBottom: "1px solid #e4e9f0", cursor: "pointer", fontFamily: HIND, color: "#2a2a2a" }}

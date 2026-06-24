@@ -3,7 +3,11 @@ import OrderButton from "./OrderButton";
 import SectionBand from "./SectionBand";
 import QualityCarousel from "./QualityCarousel";
 
-export default function QualitySection() {
+export default function QualitySection({
+  gallery,
+}: {
+  gallery?: string[];
+}) {
   return (
     <>
 
@@ -12,7 +16,7 @@ export default function QualitySection() {
       </SectionBand>
 
       <section style={{ maxWidth: 1180, margin: "0 auto" }} className="px-4 pt-8 pb-4 sm:px-[22px] sm:pt-12 sm:pb-5">
-        <QualityCarousel />
+        <QualityCarousel images={gallery} />
       </section>
 
       <div style={{ textAlign: "center" }} className="px-4 pt-6 pb-2 sm:px-5 sm:pt-[30px] sm:pb-[10px]">

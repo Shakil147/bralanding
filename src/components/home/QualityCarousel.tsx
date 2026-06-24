@@ -4,9 +4,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-const images = Array.from({ length: 8 }, (_, i) => `/assets/quality-${i + 1}.jpg`);
+const DEFAULT_IMAGES = Array.from({ length: 8 }, (_, i) => `/assets/quality-${i + 1}.jpg`);
 
-export default function QualityCarousel() {
+export default function QualityCarousel({
+  images = DEFAULT_IMAGES,
+}: {
+  images?: string[];
+}) {
   return (
     <Swiper
       modules={[Autoplay]}
