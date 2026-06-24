@@ -10,11 +10,15 @@ import { createOrder } from "@/lib/api";
 import { trackEvent } from "@/lib/fbPixel";
 import { Offer, ShippingOption } from "@/lib/types";
 
+const BD_PHONE_REGEX = /^(?:\+?880|0)1[3-9]\d{8}$/;
+
 type Props = {
   slug?: string;
   offers?: Offer[];
   sizes?: string[];
   shippingOptions?: ShippingOption[];
+  hasColor?: boolean;
+  hasNote?: boolean;
 };
 
 export default function OrderForm({
@@ -22,22 +26,29 @@ export default function OrderForm({
   offers = OFFERS,
   sizes = SIZES,
   shippingOptions = SHIPPING_OPTS,
+  hasColor = false,
+  hasNote = false,
 }: Props) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [color, setColor] = useState("");
+  const [note, setNote] = useState("");
   const [size, setSize] = useState(sizes[0]);
   const [offerIdx, setOfferIdx] = useState(0);
   const [shipIdx, setShipIdx] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [phoneTouched, setPhoneTouched] = useState(false);
 
   const offer = offers[offerIdx];
   const shipping = shippingOptions[shipIdx].cost;
   const total = offer.price + shipping;
+  const phoneValid = BD_PHONE_REGEX.test(phone.trim());
 
   async function handleSubmit() {
-    if (!name || !phone || !address || submitting) return;
+    setPhoneTouched(true);
+    if (!name || !phone || !address || !phoneValid || submitting) return;
     setSubmitting(true);
     try {
       const order = await createOrder({
@@ -49,6 +60,8 @@ export default function OrderForm({
         shipping_option: shippingOptions[shipIdx].label,
         quantity: 1,
         offer_label: offer.label,
+        ...(hasColor && color ? { color } : {}),
+        ...(hasNote && note ? { note } : {}),
       });
       setOrderId(order.order_id);
       trackEvent("Purchase", { value: order.total, currency: "BDT", product_slug: slug });
@@ -83,8 +96,40 @@ export default function OrderForm({
             <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 24px" }} className="text-2xl sm:text-[30px]">Billing details</h4>
 
             <FormField label="আপনার নাম" value={name} onChange={setName} placeholder="এখানে আপনার নাম লিখুন" />
-            <FormField label="মোবাইল নাম্বার" value={phone} onChange={setPhone} placeholder="এখানে মোবাইল নম্বরটি লিখুন" />
+            <FormField
+              label="মোবাইল নাম্বার"
+              value={phone}
+              onChange={(v) => {
+                setPhone(v);
+                setPhoneTouched(true);
+              }}
+              placeholder="এখানে মোবাইল নম্বরটি লিখুন"
+            />
+            {phoneTouched && phone && !phoneValid && (
+              <p style={{ fontFamily: HIND, color: "#e23b1f", fontSize: 15, margin: "-16px 0 16px" }}>
+                সঠিক বাংলাদেশী মোবাইল নাম্বার দিন (যেমন: 01XXXXXXXXX)
+              </p>
+            )}
             <FormField label="সম্পূর্ন ঠিকানা" value={address} onChange={setAddress} placeholder="সম্পূর্ন ঠিকানা" />
+
+            {hasColor && (
+              <FormField label="কালার লিখুন (optional)" value={color} onChange={setColor} placeholder="কালার লিখুন" required={false} />
+            )}
+
+            {hasNote && (
+              <>
+                <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, fontSize: 20, color: "#333", marginBottom: 8 }}>
+                  Order notes (optional)
+                </label>
+                <textarea
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="Order notes"
+                  rows={3}
+                  style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 22, outline: "none", resize: "vertical" }}
+                />
+              </>
+            )}
 
             <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, fontSize: 20, color: "#333", marginBottom: 8 }}>
               সাইজ সিলেক্ট করুন <span style={{ color: "#e23b1f" }}>*</span>
@@ -137,8 +182,8 @@ export default function OrderForm({
             ) : (
               <button
                 onClick={handleSubmit}
-                disabled={submitting}
-                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: HIND, fontWeight: 700, color: "#fff", background: "var(--accent, #f85606)", border: "none", borderRadius: 12, padding: 18, cursor: submitting ? "default" : "pointer", boxShadow: "0 5px 0 rgba(0,0,0,.12)", opacity: submitting ? 0.7 : 1 }}
+                disabled={submitting || (phoneTouched && !phoneValid)}
+                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: HIND, fontWeight: 700, color: "#fff", background: "var(--accent, #f85606)", border: "none", borderRadius: 12, padding: 18, cursor: submitting ? "default" : "pointer", boxShadow: "0 5px 0 rgba(0,0,0,.12)", opacity: submitting || (phoneTouched && !phoneValid) ? 0.7 : 1 }}
                 className="text-xl sm:text-2xl"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>

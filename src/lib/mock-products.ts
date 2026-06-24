@@ -63,6 +63,8 @@ export const MOCK_LANDING_PAGES: Record<string, LandingPage> = {
     ],
     whatsapp: "8801713536549",
     phone: "8801713536549",
+    hasColor: true,
+    hasNote: true,
   },
   "likke-me-bra": {
     slug: "likke-me-bra",

@@ -44,6 +44,8 @@ export type LandingPage = {
   reviews?: string[];
   whatsapp: string;
   phone: string;
+  hasColor?: boolean;
+  hasNote?: boolean;
 };
 
 export type OrderPayload = {
@@ -55,6 +57,8 @@ export type OrderPayload = {
   shipping_option: string;
   quantity: number;
   offer_label: string;
+  color?: string;
+  note?: string;
 };
 
 export type OrderResponse = {

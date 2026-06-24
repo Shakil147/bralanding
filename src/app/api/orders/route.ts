@@ -12,6 +12,8 @@ const REQUIRED_FIELDS: (keyof OrderPayload)[] = [
   "offer_label",
 ];
 
+const BD_PHONE_REGEX = /^(?:\+?880|0)1[3-9]\d{8}$/;
+
 /**
  * Mocks the Laravel order-create endpoint. Same request/response shape
  * the real Laravel POST /api/orders must implement.
@@ -23,6 +25,13 @@ export async function POST(req: NextRequest) {
   if (missing.length > 0) {
     return NextResponse.json(
       { error: "validation_failed", fields: missing },
+      { status: 422 }
+    );
+  }
+
+  if (!BD_PHONE_REGEX.test(body.phone!.trim())) {
+    return NextResponse.json(
+      { error: "validation_failed", fields: ["phone"] },
       { status: 422 }
     );
   }
