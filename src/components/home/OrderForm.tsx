@@ -127,10 +127,15 @@ export default function OrderForm() {
 
             <button
               onClick={() => alert("ধন্যবাদ! আপনার অর্ডার গ্রহণ করা হয়েছে। মোট: ৳ " + total)}
-              style={{ width: "100%", fontFamily: HIND, fontWeight: 700, color: "#fff", background: "#f85606", border: "none", borderRadius: 12, padding: 18, cursor: "pointer", boxShadow: "0 5px 0 rgba(0,0,0,.12)" }}
+              style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: HIND, fontWeight: 700, color: "#fff", background: "#f85606", border: "none", borderRadius: 12, padding: 18, cursor: "pointer", boxShadow: "0 5px 0 rgba(0,0,0,.12)" }}
               className="text-xl sm:text-2xl"
             >
-              ⬜ অর্ডার করুন ৳ {total}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              অর্ডার করুন ৳ {total}
             </button>
           </div>
         </div>

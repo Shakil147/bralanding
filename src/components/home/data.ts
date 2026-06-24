@@ -47,7 +47,7 @@ export const ORANGE_BTN: React.CSSProperties = {
   fill: "#fff",
   textDecoration: "none",
   background: "#FF4600",
-  border: "1px solid #000000",
+  border: "1px solid #ffffff",
   borderRadius: "30px 0px 30px 0px",
   boxShadow: "none",
 };
