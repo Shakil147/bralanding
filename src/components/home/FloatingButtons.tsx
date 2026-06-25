@@ -1,11 +1,22 @@
 export default function FloatingButtons({
   whatsapp = "8801713536549",
+  socialLinks,
 }: {
   whatsapp?: string;
+  socialLinks?: string[];
 }) {
+  const facebookLink = Array.isArray(socialLinks)
+    ? socialLinks.find((url) => url.includes("facebook.com") || url.includes("m.me"))
+    : undefined;
+  const messengerHref = facebookLink
+    ? facebookLink.includes("m.me")
+      ? facebookLink
+      : `https://m.me/${facebookLink.replace(/^https?:\/\/(www\.)?facebook\.com\//, "").replace(/\/$/, "")}`
+    : `https://wa.me/${whatsapp}`;
+
   return (
     <>
-      <a href="#" style={{ position: "fixed", borderRadius: "50%", background: "#0084ff", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 18px rgba(0,0,0,.25)", zIndex: 50 }} className="right-4 bottom-[88px] w-12 h-12 sm:right-[26px] sm:bottom-[104px] sm:w-[62px] sm:h-[62px]">
+      <a href={messengerHref} style={{ position: "fixed", borderRadius: "50%", background: "#0084ff", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 18px rgba(0,0,0,.25)", zIndex: 50 }} className="right-4 bottom-[88px] w-12 h-12 sm:right-[26px] sm:bottom-[104px] sm:w-[62px] sm:h-[62px]">
         <svg width="34" height="34" viewBox="0 0 24 24" fill="#fff" className="w-6 h-6 sm:w-[34px] sm:h-[34px]">
           <path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.14.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.99-.88c.17-.07.36-.09.54-.04 .91.25 1.88.39 2.8.39 5.64 0 10-4.13 10-9.7C22 6.13 17.64 2 12 2Zm6 7.46-2.93 4.65c-.47.74-1.47.93-2.17.41l-2.33-1.75a.6.6 0 0 0-.72 0l-3.16 2.4c-.42.32-.97-.18-.68-.62l2.93-4.65c.47-.74 1.47-.93 2.17-.41l2.33 1.75a.6.6 0 0 0 .72 0l3.15-2.4c.42-.32.97.18.69.62Z" />
         </svg>
