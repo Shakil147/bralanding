@@ -52,6 +52,8 @@ List all active landing pages for the organization.
       "seo_keywords": ["..."],
       "canonical": "https://yourapp.com/landingpage/summer-sale",
       "price_label": "...",
+      "old_price_line": "৳1200",
+      "new_price_line": "৳999",
       "offers": [
         {
           "product_id": 12,
@@ -83,6 +85,8 @@ List all active landing pages for the organization.
   ]
 }
 ```
+
+`old_price_line` / `new_price_line` — free-text price display lines on the landing page header (separate from per-offer `price`/`old_price`). Plain strings, e.g. `"৳1200"` / `"৳999"`. Editable at `/user/landing-pages/{id}/edit`.
 
 **Size-wise pricing — which field to use:**
 

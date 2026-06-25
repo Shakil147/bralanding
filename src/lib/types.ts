@@ -38,6 +38,8 @@ export type LandingPage = {
   video_id: string | null;
   offers: Offer[];
   price_label?: string;
+  old_price_line?: string;
+  new_price_line?: string;
   accent_color?: string;
   seo_title?: string;
   seo_description?: string;
