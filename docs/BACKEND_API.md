@@ -160,8 +160,11 @@ Create a sale/order for a product shown on a landing page.
 | `quantity` | int, min 1 | no | Defaults to 1 |
 | `color` | string, max 50 | conditional | Required if landing page `hasColor` is true |
 | `note` | string, max 1000 | conditional | Required if landing page `hasNote` is true |
+| `session_token` | string, max 64 | conditional | Fallback if the `vtk_session` cookie can't be forwarded (see below) |
 
 Server computes `total_amount = unit_price * quantity + shipping_cost`. Any matching pending `LeadCapture` for the same phone is auto-marked `converted` and linked to the new order.
+
+**Duplicate-order protection (required):** every order must carry a browser identity token — either the `vtk_session` cookie (set by the landing page's GET response) or a `session_token` field in the body. If both are absent, the request is rejected with 422 (`session_token` field error) — orders proxied through a backend **must** forward the visitor's `vtk_session` cookie value as `session_token` in the body, since the cookie itself won't survive a server-to-server proxy hop. The resolved token is stored on the order. If the same browser already placed an order for a product on the same landing page within the last 24 hours, the request is rejected with 422 (`order` field error).
 
 **Response 201**
 ```json
@@ -180,7 +183,7 @@ Server computes `total_amount = unit_price * quantity + shipping_cost`. Any matc
   "errors": { "size": ["Selected size is not available for this product."] }
 }
 ```
-Possible field-level errors: `product_id` (no active landing page), `size`, `shipping_option`, `color`, `note`.
+Possible field-level errors: `product_id` (no active landing page), `size`, `shipping_option`, `color`, `note`, `session_token` (missing browser identity token), `order` (duplicate order from same browser within 24h).
 
 ### POST `/visitor-sessions`
 Upsert a visitor session for analytics/attribution tracking. Call once per page load with a stable `session_token` (e.g. stored in a cookie/localStorage).
@@ -253,4 +256,4 @@ Created with `status: "pending"`.
 3. When user enters phone but hasn't submitted: `POST /leads` (private key, via backend proxy).
 4. On checkout submit: `POST /orders` (private key, via backend proxy).
 
-**Important:** the private key (`sk_...`) must never be embedded in client-side JS. Route `/orders`, `/visitor-sessions`, and `/leads` calls through your own backend, which holds the secret key and forwards the request.
+**Important:** the private key (`sk_...`) must never be embedded in client-side JS. Route `/orders`, `/visitor-sessions`, and `/leads` calls through your own backend, which holds the secret key and forwards the request. For `/orders` specifically, your backend must also read the visitor's `vtk_session` cookie from the incoming browser request and forward it as `session_token` in the proxied body — the cookie itself doesn't survive the proxy hop, and `/orders` now rejects requests with neither.

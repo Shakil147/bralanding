@@ -80,6 +80,7 @@ export type OrderPayload = {
   quantity?: number;
   color?: string;
   note?: string;
+  session_token?: string;
 };
 
 export type OrderResponse = {
