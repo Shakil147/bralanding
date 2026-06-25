@@ -48,7 +48,7 @@ export default async function LandingPage({ params }: Params) {
       <Header title={page.title} subtitle={page.subtitle} subtitle2={page.subtitle2} price={defaultOffer.price} offerLabel={defaultOffer.label} />
       <VideoSection videoId={page.video_id ?? undefined} title={page.title} />
       <BenefitsSection title={`${page.title} ব্যবহারে যেসব সুবিধা পাবেন:`} benefits={page.benefits} banner={page.benefits_image} />
-      <PriceBox price={defaultOffer.price} oldPrice={defaultOffer.old_price} sizeOffers={page.size_price_offers} priceLabel={page.price_label} />
+      <PriceBox price={defaultOffer.price} oldPrice={defaultOffer.old_price} variants={defaultOffer.variants} priceLabel={page.price_label} />
       <WhyBuySection whyBuy={page.why_buy} image={page.why_buy_image} />
       <QualitySection gallery={page.gallery} />
       <ReviewsSection reviews={page.reviews} />

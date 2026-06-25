@@ -4,19 +4,26 @@ export type ShippingOption = {
   time?: string;
 };
 
+export type Variant = {
+  id: number;
+  sku?: string;
+  size: string;
+  price: number;
+  old_price?: number;
+  image?: string;
+};
+
 export type Offer = {
   product_id: number;
   label: string;
   price: number;
   old_price?: number;
   img: string;
+  /** Legacy single size on the landing-page/product pivot row. Prefer `variants`. */
   size?: string;
+  /** Canonical size-wise pricing — real per-size SKU/price/old_price/image. Use this over `size`. */
+  variants?: Variant[];
   color?: string;
-};
-
-export type SizePriceOffer = {
-  label: string;
-  price: number;
 };
 
 export type LandingPage = {
@@ -30,7 +37,6 @@ export type LandingPage = {
   why_buy_image: string;
   video_id: string | null;
   offers: Offer[];
-  size_price_offers?: SizePriceOffer[];
   price_label?: string;
   accent_color?: string;
   seo_title?: string;

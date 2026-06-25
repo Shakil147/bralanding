@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HIND, OFFERS, SHIPPING_OPTS, SIZES } from "./data";
 import OfferOption from "./order/OfferOption";
 import FormField from "./order/FormField";
@@ -36,6 +36,7 @@ export default function OrderForm({
   const [note, setNote] = useState("");
   const [size, setSize] = useState(sizes[0]);
   const [offerIdx, setOfferIdx] = useState(0);
+  const [variantIdx, setVariantIdx] = useState(0);
   const [shipIdx, setShipIdx] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
@@ -43,8 +44,21 @@ export default function OrderForm({
   const lastLeadPhoneRef = useRef<string | null>(null);
 
   const offer = offers[offerIdx];
+  // offer.variants is the canonical size-wise pricing source; offer.size is legacy single-size.
+  const variants = offer.variants;
+  const hasVariants = !!variants && variants.length > 0;
+
+  useEffect(() => {
+    setVariantIdx(0);
+  }, [offerIdx]);
+
+  const selectedVariant = hasVariants ? variants![Math.min(variantIdx, variants!.length - 1)] : undefined;
+  const effectivePrice = selectedVariant?.price ?? offer.price;
+  const effectiveSize = selectedVariant?.size ?? size;
+  const effectiveImg = selectedVariant?.image ?? offer.img;
+
   const shipping = shippingOptions[shipIdx].cost;
-  const total = offer.price + shipping;
+  const total = effectivePrice + shipping;
   const phoneValid = BD_PHONE_REGEX.test(phone.trim());
 
   function maybeCaptureLead() {
@@ -83,7 +97,7 @@ export default function OrderForm({
           name,
           phone,
           address,
-          size,
+          size: effectiveSize,
           shipping_option: shippingOptions[shipIdx].label,
           quantity: 1,
           ...(hasColor && color ? { color } : {}),
@@ -146,15 +160,27 @@ export default function OrderForm({
             <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, fontSize: 20, color: "#333", marginBottom: 8 }}>
               সাইজ সিলেক্ট করুন <span style={{ color: "#e23b1f" }}>*</span>
             </label>
-            <select
-              value={size}
-              onChange={(e) => setSize(e.target.value)}
-              style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 30, outline: "none" }}
-            >
-              {sizes.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
+            {hasVariants ? (
+              <select
+                value={variantIdx}
+                onChange={(e) => setVariantIdx(Number(e.target.value))}
+                style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 30, outline: "none" }}
+              >
+                {variants!.map((v, i) => (
+                  <option key={v.id} value={i}>{v.size} — ৳ {v.price}</option>
+                ))}
+              </select>
+            ) : (
+              <select
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
+                style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 30, outline: "none" }}
+              >
+                {sizes.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            )}
 
             {hasColor && (
               <FormField label="কালার লিখুন (optional)" value={color} onChange={setColor} placeholder="কালার লিখুন" required={false} />
@@ -183,7 +209,7 @@ export default function OrderForm({
               shipIdx={shipIdx}
               onChange={(i) => {
                 setShipIdx(i);
-                trackEvent("InitiateCheckout", { value: offer.price + shippingOptions[i].cost, currency: "BDT", product_slug: slug });
+                trackEvent("InitiateCheckout", { value: effectivePrice + shippingOptions[i].cost, currency: "BDT", product_slug: slug });
               }}
               options={shippingOptions}
             />
@@ -192,14 +218,14 @@ export default function OrderForm({
           {/* order summary */}
           <div>
             <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 22px" }} className="text-2xl sm:text-[30px]">Your order</h4>
-            <SummaryRow label="Product" value={`৳ ${offer.price}`} bold size={22} />
+            <SummaryRow label="Product" value={`৳ ${effectivePrice}`} bold size={22} />
             <div style={{ alignItems: "center", padding: "18px 0", borderBottom: "1px dashed #c5cfdb" }} className="flex flex-wrap gap-3 sm:flex-nowrap sm:gap-[18px]">
-              <img src={offer.img} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-14 h-16 sm:w-16 sm:h-[74px]" />
+              <img src={effectiveImg} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-14 h-16 sm:w-16 sm:h-[74px]" />
               <span style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21 }} className="basis-full sm:basis-auto sm:flex-1">{offer.label}</span>
               <span style={{ fontFamily: HIND, fontSize: 20, color: "#555" }}>× 1</span>
-              <span style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21, marginLeft: "auto" }} className="sm:ml-0">৳ {offer.price}</span>
+              <span style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21, marginLeft: "auto" }} className="sm:ml-0">৳ {effectivePrice}</span>
             </div>
-            <SummaryRow label="Subtotal" value={`৳ ${offer.price}`} bold />
+            <SummaryRow label="Subtotal" value={`৳ ${effectivePrice}`} bold />
             <SummaryRow label="Shipping" value={`৳ ${shipping}`} />
             <SummaryRow label="Total" value={`৳ ${total}`} bold size={24} dashed={false} />
 

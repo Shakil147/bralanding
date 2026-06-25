@@ -1,15 +1,15 @@
 import { HIND } from "./data";
-import { SizePriceOffer } from "@/lib/types";
+import { Variant } from "@/lib/types";
 
 export default function PriceBox({
   price = 999,
   oldPrice = 1500,
-  sizeOffers,
+  variants,
   priceLabel,
 }: {
   price?: number;
   oldPrice?: number;
-  sizeOffers?: SizePriceOffer[];
+  variants?: Variant[];
   priceLabel?: string;
 }) {
   return (
@@ -32,13 +32,13 @@ export default function PriceBox({
         </p>
         <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: 0 }} className="text-lg sm:text-xl md:text-[33px]">
           {priceLabel ? `অফার প্রাইজ ${priceLabel} ` : "এখন মাত্র "}
-          {sizeOffers && sizeOffers.length > 0 ? (
-            sizeOffers.map((o, i) => (
-              <span key={o.label}>
+          {variants && variants.length > 0 ? (
+            variants.map((v, i) => (
+              <span key={v.id}>
                 {i > 0 ? " & " : ""}
-                {o.label}{" "}
+                {v.size}{" "}
                 <span style={{ position: "relative", display: "inline-block" }}>
-                  <span style={{ fontFamily: HIND, fontWeight: 700 }}>{o.price}/-</span>
+                  <span style={{ fontFamily: HIND, fontWeight: 700 }}>{v.price}/-</span>
                   <svg
                     viewBox="0 0 500 150"
                     preserveAspectRatio="none"
@@ -73,7 +73,7 @@ export default function PriceBox({
               </svg>
             </span>
           )}
-          {sizeOffers && sizeOffers.length > 0 ? " টাকা মাত্র" : ""}
+          {variants && variants.length > 0 ? " টাকা মাত্র" : ""}
         </p>
       </div>
     </section>

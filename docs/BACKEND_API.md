@@ -53,9 +53,19 @@ List all active landing pages for the organization.
       "canonical": "https://yourapp.com/landingpage/summer-sale",
       "price_label": "...",
       "offers": [
-        { "product_id": 12, "label": "1 pc", "price": 990, "old_price": 1200, "img": "https://..." }
+        {
+          "product_id": 12,
+          "label": "1 pc",
+          "price": 990,
+          "old_price": 1200,
+          "img": "https://...",
+          "size": "M",
+          "variants": [
+            { "id": 1, "sku": "TS-32", "size": "32", "old_price": 1500.0, "price": 999.0, "image": "https://..." },
+            { "id": 2, "sku": "TS-34", "size": "34", "old_price": 1500.0, "price": 999.0, "image": "https://..." }
+          ]
+        }
       ],
-      "size_price_offers": [],
       "benefits": [],
       "why_buy": [],
       "important_points": [],
@@ -73,6 +83,15 @@ List all active landing pages for the organization.
   ]
 }
 ```
+
+**Size-wise pricing — which field to use:**
+
+| Field | Source | Status |
+|---|---|---|
+| `offers[].variants` | `product_variants` table (managed at `/user/products/{id}/edit` → Attributes & Variants UI) | **Use this.** Real per-size SKU, price, old_price, image, active flag |
+| `offers[].size` | single size string on the landing-page/product pivot row | Legacy, one size per offer only — not multi-size |
+
+Only active (`is_active: true`) variants are returned, each scoped to that product. `variants[].size` resolves from the variant's `Size` attribute value.
 
 ### GET `/landing-pages/{idOrSlug}`
 Single landing page by numeric `id` or `slug`. Same shape as one item above (no array wrapper).
