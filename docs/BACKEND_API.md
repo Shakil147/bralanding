@@ -11,7 +11,7 @@ Two key types, scoped to an Organization (`organization_api_keys` table).
 | Key type | Prefix | Header | Used for |
 |---|---|---|---|
 | Public  | `pk_` | `X-Public-Key` (or `?public_key=` / `?api_key=` query param) | Public read-only endpoints |
-| Private | `sk_` | `X-Private-Key` | Write endpoints (orders, leads, visitor sessions) |
+| Private | `sk_` | `X-Private-Key` | Write endpoints (orders, leads, visitor sessions) + `/organization` |
 
 Keys must be `is_active = true`. Each successful request updates the key's `last_used_at`.
 
@@ -105,6 +105,14 @@ Single landing page by numeric `id` or `slug`. Same shape as one item above (no 
 { "success": false, "message": "Landing page not found." }
 ```
 
+> `GET /products` and `GET /products/{idOrSlug}` exist in `ProductController` but are currently commented out in `routes/api.php` — not live.
+
+---
+
+## Private Endpoints (`X-Private-Key: sk_...`)
+
+Write-only (plus one read, `/organization` — moved here since it carries the Facebook CAPI config). Use these from server-side / backend integrations, not directly from public frontend JS (don't expose the secret key client-side).
+
 ### GET `/organization`
 Current organization profile (resolved from the API key).
 
@@ -122,18 +130,13 @@ Current organization profile (resolved from the API key).
     "email": "hello@acme.com",
     "address": "...",
     "default_color": "#000000",
-    "social_links": []
+    "social_links": [],
+    "facebook_pixel_id": "1234567890123456",
+    "facebook_capi_token": "EAAxxxxxxxxxxxxx..."
   }
 }
 ```
-
-> `GET /products` and `GET /products/{idOrSlug}` exist in `ProductController` but are currently commented out in `routes/api.php` — not live.
-
----
-
-## Private Endpoints (`X-Private-Key: sk_...`)
-
-Write-only. Use these from server-side / backend integrations, not directly from public frontend JS (don't expose the secret key client-side).
+`facebook_capi_token` is the secret Conversions API access token — only returned here because this endpoint requires the private (`sk_`) key. Never log or forward it to client-side JS.
 
 ### POST `/orders`
 Create a sale/order for a product shown on a landing page.
