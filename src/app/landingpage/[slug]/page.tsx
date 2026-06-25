@@ -60,6 +60,7 @@ export default async function LandingPage({ params }: Params) {
         shippingOptions={page.shipping_options}
         hasColor={page.hasColor}
         hasNote={page.hasNote}
+        contactPhone={page.phone}
       />
       <FloatingButtons whatsapp={page.whatsapp} />
     </div>

@@ -6,6 +6,7 @@ import OfferOption from "./order/OfferOption";
 import FormField from "./order/FormField";
 import ShippingOptions from "./order/ShippingOptions";
 import SummaryRow from "./order/SummaryRow";
+import Swal from "sweetalert2";
 import { trackEvent } from "@/lib/fbPixel";
 import { getSessionToken, getUtmParams } from "@/lib/attribution";
 import { Offer, OrderResponse, ShippingOption } from "@/lib/types";
@@ -19,6 +20,7 @@ type Props = {
   shippingOptions?: ShippingOption[];
   hasColor?: boolean;
   hasNote?: boolean;
+  contactPhone?: string;
 };
 
 export default function OrderForm({
@@ -28,6 +30,7 @@ export default function OrderForm({
   shippingOptions = SHIPPING_OPTS,
   hasColor = false,
   hasNote = false,
+  contactPhone,
 }: Props) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -40,7 +43,6 @@ export default function OrderForm({
   const [shipIdx, setShipIdx] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [phoneTouched, setPhoneTouched] = useState(false);
   const lastLeadPhoneRef = useRef<string | null>(null);
 
@@ -88,7 +90,6 @@ export default function OrderForm({
     setPhoneTouched(true);
     if (!name || !phone || !address || !phoneValid || submitting) return;
     setSubmitting(true);
-    setErrorMsg(null);
     try {
       // Hits this app's own server route, never the external API directly from the browser.
       const res = await fetch("/api/orders", {
@@ -110,9 +111,19 @@ export default function OrderForm({
       if (!res.ok) {
         const json = await res.json().catch(() => null);
         if (json?.errors?.order) {
-          setErrorMsg("আপনি এই পণ্যটি সম্প্রতি অর্ডার করেছেন। অনুগ্রহ করে ২৪ ঘণ্টা পর আবার চেষ্টা করুন।");
-        } else if (json?.message) {
-          setErrorMsg(json.message);
+          Swal.fire({
+            icon: "info",
+            title: "আপনি ইতিমধ্যে অর্ডার করেছেন",
+            html: `আপনি এই পণ্যটি ইতিমধ্যে অর্ডার করেছেন।${contactPhone ? ` বিস্তারিত জানতে আমাদের সাথে যোগাযোগ করুন: <a href="tel:${contactPhone}" style="color:#f85606;font-weight:600;">${contactPhone}</a>` : " বিস্তারিত জানতে আমাদের সাথে যোগাযোগ করুন।"}`,
+            confirmButtonColor: "#f85606",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "দুঃখিত!",
+            text: json?.message ?? "অর্ডারটি সম্পন্ন করা যায়নি। আবার চেষ্টা করুন।",
+            confirmButtonColor: "#f85606",
+          });
         }
         return;
       }
@@ -120,6 +131,12 @@ export default function OrderForm({
       const order = json.data as OrderResponse;
       setOrderId(String(order.id));
       trackEvent("Purchase", { value: order.total_amount, currency: "BDT", product_slug: slug });
+      Swal.fire({
+        icon: "success",
+        title: "ধন্যবাদ!",
+        text: `আপনার অর্ডার গ্রহণ করা হয়েছে। অর্ডার নম্বর: ${order.id}`,
+        confirmButtonColor: "#f85606",
+      });
     } finally {
       setSubmitting(false);
     }
@@ -251,26 +268,19 @@ export default function OrderForm({
                 ধন্যবাদ! আপনার অর্ডার গ্রহণ করা হয়েছে। অর্ডার নম্বর: {orderId}
               </div>
             ) : (
-              <>
-                {errorMsg && (
-                  <p style={{ fontFamily: HIND, color: "#e23b1f", fontSize: 16, margin: "0 0 14px", textAlign: "center" }}>
-                    {errorMsg}
-                  </p>
-                )}
-                <button
-                  onClick={handleSubmit}
-                  disabled={submitting || (phoneTouched && !phoneValid)}
-                  style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: HIND, fontWeight: 700, color: "#fff", background: "var(--accent, #f85606)", border: "none", borderRadius: 12, padding: 18, cursor: submitting ? "default" : "pointer", boxShadow: "0 5px 0 rgba(0,0,0,.12)", opacity: submitting || (phoneTouched && !phoneValid) ? 0.7 : 1 }}
-                  className="text-xl sm:text-2xl"
-                >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                    <circle cx="9" cy="21" r="1" />
-                    <circle cx="20" cy="21" r="1" />
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                  </svg>
-                  {submitting ? "অপেক্ষা করুন..." : `অর্ডার করুন ৳ ${total}`}
-                </button>
-              </>
+              <button
+                onClick={handleSubmit}
+                disabled={submitting || (phoneTouched && !phoneValid)}
+                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: HIND, fontWeight: 700, color: "#fff", background: "var(--accent, #f85606)", border: "none", borderRadius: 12, padding: 18, cursor: submitting ? "default" : "pointer", boxShadow: "0 5px 0 rgba(0,0,0,.12)", opacity: submitting || (phoneTouched && !phoneValid) ? 0.7 : 1 }}
+                className="text-xl sm:text-2xl"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg>
+                {submitting ? "অপেক্ষা করুন..." : `অর্ডার করুন ৳ ${total}`}
+              </button>
             )}
           </div>
         </div>
