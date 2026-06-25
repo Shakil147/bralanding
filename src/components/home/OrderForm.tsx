@@ -45,6 +45,7 @@ export default function OrderForm({
   const [orderId, setOrderId] = useState<string | null>(null);
   const [phoneTouched, setPhoneTouched] = useState(false);
   const lastLeadPhoneRef = useRef<string | null>(null);
+  const icFiredRef = useRef(false);
 
   const offer = offers[offerIdx];
   // offer.variants is the canonical size-wise pricing source; offer.size is legacy single-size.
@@ -63,6 +64,14 @@ export default function OrderForm({
   const shipping = shippingOptions[shipIdx].cost;
   const total = effectivePrice + shipping;
   const phoneValid = BD_PHONE_REGEX.test(phone.trim());
+
+  // Fire InitiateCheckout at most once per page session — repeated fires get
+  // fresh event_ids that Meta can't dedupe and inflate the funnel.
+  function fireInitiateCheckout(value: number) {
+    if (icFiredRef.current) return;
+    icFiredRef.current = true;
+    trackEvent("InitiateCheckout", { value, currency: "BDT", product_slug: slug });
+  }
 
   function maybeCaptureLead() {
     const trimmed = phone.trim();
@@ -130,7 +139,7 @@ export default function OrderForm({
       const json = await res.json();
       const order = json.data as OrderResponse;
       setOrderId(String(order.id));
-      trackEvent("Purchase", { value: order.total_amount, currency: "BDT", product_slug: slug });
+      trackEvent("Purchase", { value: order.total_amount, currency: "BDT", product_slug: slug, phone, name });
       Swal.fire({
         icon: "success",
         title: "ধন্যবাদ!",
@@ -157,7 +166,7 @@ export default function OrderForm({
             checked={i === offerIdx}
             onSelect={() => {
               setOfferIdx(i);
-              trackEvent("InitiateCheckout", { value: o.price + shipping, currency: "BDT", product_slug: slug });
+              fireInitiateCheckout(o.price + shipping);
             }}
           />
         ))}
@@ -174,6 +183,7 @@ export default function OrderForm({
               onChange={(v) => {
                 setPhone(v);
                 setPhoneTouched(true);
+                fireInitiateCheckout(total);
               }}
               onBlur={maybeCaptureLead}
               placeholder="এখানে মোবাইল নম্বরটি লিখুন"
@@ -237,7 +247,7 @@ export default function OrderForm({
               shipIdx={shipIdx}
               onChange={(i) => {
                 setShipIdx(i);
-                trackEvent("InitiateCheckout", { value: effectivePrice + shippingOptions[i].cost, currency: "BDT", product_slug: slug });
+                fireInitiateCheckout(effectivePrice + shippingOptions[i].cost);
               }}
               options={shippingOptions}
             />

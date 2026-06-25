@@ -1,6 +1,7 @@
 "use client";
 
 import { FbEventName, FbEventPayload } from "./types";
+import { getFbCookies } from "./attribution";
 
 declare global {
   interface Window {
@@ -18,18 +19,35 @@ function newEventId(): string {
  */
 export function trackEvent(
   eventName: FbEventName,
-  params: { value?: number; currency?: string; product_slug?: string } = {}
+  params: {
+    value?: number;
+    currency?: string;
+    product_slug?: string;
+    /** Raw PII — sent to CAPI only (hashed server-side), never to the Pixel. */
+    phone?: string;
+    name?: string;
+  } = {}
 ) {
   const eventId = newEventId();
+  const eventTime = Math.floor(Date.now() / 1000);
+  const { phone, name, ...pixelParams } = params;
 
   if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", eventName, params, { eventID: eventId });
+    // Pixel gets only non-PII params; eventID is the CAPI dedup key.
+    window.fbq("track", eventName, pixelParams, { eventID: eventId });
   }
+
+  const fbCookies = typeof window !== "undefined" ? getFbCookies() : {};
 
   const payload: FbEventPayload = {
     event_name: eventName,
     event_id: eventId,
-    ...params,
+    event_time: eventTime,
+    event_source_url: typeof window !== "undefined" ? window.location.href : undefined,
+    ...pixelParams,
+    ...fbCookies,
+    ...(phone ? { phone } : {}),
+    ...(name ? { name } : {}),
   };
 
   fetch("/api/fb-events", {

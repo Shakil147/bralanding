@@ -150,6 +150,15 @@ export type FbEventPayload = {
   product_slug?: string;
   value?: number;
   currency?: string;
+  /** Unix seconds of the actual client event; server falls back to its own time. */
+  event_time?: number;
+  /** URL where the event happened (window.location.href). */
+  event_source_url?: string;
+  /** Meta's _fbp cookie, verbatim — never hashed. */
   fbp?: string;
+  /** Meta's _fbc cookie (or synthesized from fbclid), verbatim — never hashed. */
   fbc?: string;
+  /** Raw PII; hashed server-side only. Never forwarded to the browser Pixel. */
+  phone?: string;
+  name?: string;
 };

@@ -45,6 +45,26 @@ export function getUtmParams(): UtmParams {
   return stored ? (JSON.parse(stored) as UtmParams) : {};
 }
 
+// Reads Meta's first-party cookies for CAPI matching. _fbc is synthesized from
+// fbclid (fb.1.<unixMs>.<fbclid>) when the cookie itself hasn't been set yet —
+// e.g. the Pixel script hasn't run or the visitor blocks it.
+export function getFbCookies(): { fbp?: string; fbc?: string } {
+  const read = (name: string): string | undefined => {
+    const match = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
+    return match ? decodeURIComponent(match[1]) : undefined;
+  };
+
+  const fbp = read("_fbp");
+  let fbc = read("_fbc");
+
+  if (!fbc) {
+    const { fbclid } = getUtmParams();
+    if (fbclid) fbc = `fb.1.${Date.now()}.${fbclid}`;
+  }
+
+  return { ...(fbp ? { fbp } : {}), ...(fbc ? { fbc } : {}) };
+}
+
 export function getDeviceInfo() {
   const ua = navigator.userAgent;
   const device_type = /Tablet|iPad/i.test(ua)
