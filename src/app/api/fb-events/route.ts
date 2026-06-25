@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getOrganization } from "@/lib/api";
 import { FbEventPayload } from "@/lib/types";
 
-/**
- * Mocks Facebook's Graph API Conversions endpoint
- * (graph.facebook.com/v19.0/{pixel_id}/events). Swapping the mock for the
- * real call later only needs this handler's body replaced - the shape of
- * the request from the client and the response stay the same.
- */
 export async function POST(req: NextRequest) {
   const body = (await req.json()) as FbEventPayload;
 
@@ -17,7 +12,35 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  console.log("[fb-events:mock]", body);
+  const org = await getOrganization().catch(() => null);
 
-  return NextResponse.json({ events_received: 1, fbtrace_id: `mock-${body.event_id}` });
+  if (!org?.facebook_pixel_id || !org?.facebook_capi_token) {
+    return NextResponse.json({ events_received: 0, fbtrace_id: null });
+  }
+
+  const res = await fetch(
+    `https://graph.facebook.com/v19.0/${org.facebook_pixel_id}/events?access_token=${org.facebook_capi_token}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        data: [
+          {
+            event_name: body.event_name,
+            event_id: body.event_id,
+            event_time: Math.floor(Date.now() / 1000),
+            action_source: "website",
+            custom_data: {
+              value: body.value,
+              currency: body.currency,
+              content_name: body.product_slug,
+            },
+          },
+        ],
+      }),
+    }
+  );
+
+  const data = await res.json();
+  return NextResponse.json(data, { status: res.status });
 }

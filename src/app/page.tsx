@@ -12,7 +12,7 @@ export default async function Home() {
 
   return (
     <div style={{ background: "#f7f9fc", width: "100%", overflowX: "hidden", color: "#222" }}>
-      <HomeHero name={org?.name} />
+      <HomeHero name={org?.name} logo={org?.logo} />
       <Catalog pages={pages} />
       <Footer org={org} />
       <FloatingButtons whatsapp={org?.whatsapp} socialLinks={org?.social_links} />

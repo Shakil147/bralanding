@@ -70,6 +70,9 @@ export type Organization = {
   address?: string;
   default_color?: string;
   social_links?: string[];
+  facebook_pixel_id?: string;
+  /** Secret Conversions API token — only present via the private (sk_) key. Never forward to client-side JS. */
+  facebook_capi_token?: string;
 };
 
 export type OrderPayload = {

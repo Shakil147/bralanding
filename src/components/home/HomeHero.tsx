@@ -1,8 +1,12 @@
 import { HIND } from "./data";
 
-export default function HomeHero({ name }: { name?: string }) {
+export default function HomeHero({ name, logo }: { name?: string; logo?: string }) {
   return (
     <header style={{ background: "var(--accent, #f85606)" }} className="text-center px-4 py-10 sm:px-5 sm:py-14">
+      {logo && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={logo} alt={name ?? "logo"} className="mx-auto mb-4 h-14 sm:h-16 object-contain" />
+      )}
       <h1
         style={{ fontFamily: HIND, fontWeight: 800, color: "#fff", margin: 0, textShadow: "0 2px 6px rgba(0,0,0,.12)" }}
         className="text-3xl sm:text-4xl md:text-5xl"

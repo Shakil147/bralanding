@@ -68,7 +68,7 @@ export async function getLandingPage(idOrSlug: string | number): Promise<Landing
 }
 
 export function getOrganization(): Promise<Organization> {
-  return apiFetch<Organization>("/organization", "X-Public-Key", { cache: "no-store" });
+  return apiFetch<Organization>("/organization", "X-Private-Key", { cache: "no-store" });
 }
 
 // Used by this app's own Route Handlers (src/app/api/*), which proxy browser
