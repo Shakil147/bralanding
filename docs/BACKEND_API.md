@@ -53,7 +53,7 @@ List all active landing pages for the organization.
       "canonical": "https://yourapp.com/landingpage/summer-sale",
       "price_label": "...",
       "offers": [
-        { "label": "1 pc", "price": 990, "old_price": 1200, "img": "https://..." }
+        { "product_id": 12, "label": "1 pc", "price": 990, "old_price": 1200, "img": "https://..." }
       ],
       "size_price_offers": [],
       "benefits": [],

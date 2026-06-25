@@ -1,9 +1,11 @@
 export type ShippingOption = {
   label: string;
   cost: number;
+  time?: string;
 };
 
 export type Offer = {
+  product_id: number;
   label: string;
   price: number;
   old_price?: number;
@@ -18,6 +20,7 @@ export type SizePriceOffer = {
 };
 
 export type LandingPage = {
+  id: number;
   slug: string;
   title: string;
   subtitle: string;
@@ -25,7 +28,7 @@ export type LandingPage = {
   thumbnail: string;
   benefits_image: string;
   why_buy_image: string;
-  video_id: string;
+  video_id: string | null;
   offers: Offer[];
   size_price_offers?: SizePriceOffer[];
   price_label?: string;
@@ -48,24 +51,80 @@ export type LandingPage = {
   hasNote?: boolean;
 };
 
+export type Organization = {
+  name: string;
+  slug: string;
+  logo?: string;
+  favicon?: string;
+  phone?: string;
+  whatsapp?: string;
+  email?: string;
+  address?: string;
+  default_color?: string;
+  social_links?: string[];
+};
+
 export type OrderPayload = {
-  product_slug: string;
+  product_id: number;
   name: string;
   phone: string;
   address: string;
   size: string;
   shipping_option: string;
-  quantity: number;
-  offer_label: string;
+  quantity?: number;
   color?: string;
   note?: string;
 };
 
 export type OrderResponse = {
-  order_id: string;
+  id: number;
   status: "pending" | "confirmed" | "cancelled";
-  total: number;
+  total_amount: number;
 };
+
+export type VisitorSessionPayload = {
+  session_token: string;
+  landing_page?: string;
+  referrer?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+  browser?: string;
+  browser_version?: string;
+  os?: string;
+  device_type?: string;
+  country?: string;
+  city?: string;
+};
+
+export type VisitorSessionResponse = {
+  id: number;
+  page_view_count: number;
+};
+
+export type LeadPayload = {
+  phone: string;
+  name?: string;
+  landing_page?: string;
+  product_id?: number;
+  device_fingerprint?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  utm_term?: string;
+  fbclid?: string;
+};
+
+export type LeadResponse = {
+  id: number;
+  status: "pending" | "converted";
+};
+
+export type ApiSuccess<T> = { success: true; data: T };
+export type ApiError = { success: false; message: string };
 
 export type FbEventName =
   | "PageView"

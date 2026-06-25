@@ -12,6 +12,7 @@ import ImportantPoints from "@/components/home/ImportantPoints";
 import OrderForm from "@/components/home/OrderForm";
 import FloatingButtons from "@/components/home/FloatingButtons";
 import ViewContentTracker from "@/components/home/ViewContentTracker";
+import VisitorSessionTracker from "@/components/home/VisitorSessionTracker";
 import { getLandingPage } from "@/lib/api";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -43,8 +44,9 @@ export default async function LandingPage({ params }: Params) {
   return (
     <div style={{ background: "#f7f9fc", width: "100%", overflowX: "hidden", color: "#222", ...(page.accent_color ? { "--accent": page.accent_color } as CSSProperties : {}) }}>
       <ViewContentTracker slug={page.slug} price={defaultOffer.price} />
+      <VisitorSessionTracker landingPage={page.slug} />
       <Header title={page.title} subtitle={page.subtitle} subtitle2={page.subtitle2} price={defaultOffer.price} offerLabel={defaultOffer.label} />
-      <VideoSection videoId={page.video_id} title={page.title} />
+      <VideoSection videoId={page.video_id ?? undefined} title={page.title} />
       <BenefitsSection title={`${page.title} ব্যবহারে যেসব সুবিধা পাবেন:`} benefits={page.benefits} banner={page.benefits_image} />
       <PriceBox price={defaultOffer.price} oldPrice={defaultOffer.old_price} sizeOffers={page.size_price_offers} priceLabel={page.price_label} />
       <WhyBuySection whyBuy={page.why_buy} image={page.why_buy_image} />

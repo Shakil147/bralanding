@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { HIND, OFFERS, SHIPPING_OPTS, SIZES } from "./data";
 import OfferOption from "./order/OfferOption";
 import FormField from "./order/FormField";
 import ShippingOptions from "./order/ShippingOptions";
 import SummaryRow from "./order/SummaryRow";
 import { trackEvent } from "@/lib/fbPixel";
+import { getUtmParams } from "@/lib/attribution";
 import { Offer, OrderResponse, ShippingOption } from "@/lib/types";
 
 const BD_PHONE_REGEX = /^(?:\+?880|0)1[3-9]\d{8}$/;
@@ -39,11 +40,34 @@ export default function OrderForm({
   const [submitting, setSubmitting] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
   const [phoneTouched, setPhoneTouched] = useState(false);
+  const lastLeadPhoneRef = useRef<string | null>(null);
 
   const offer = offers[offerIdx];
   const shipping = shippingOptions[shipIdx].cost;
   const total = offer.price + shipping;
   const phoneValid = BD_PHONE_REGEX.test(phone.trim());
+
+  function maybeCaptureLead() {
+    const trimmed = phone.trim();
+    if (!phoneValid || trimmed === lastLeadPhoneRef.current) return;
+    lastLeadPhoneRef.current = trimmed;
+
+    const { fbclid, ...utm } = getUtmParams();
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        phone: trimmed,
+        ...(name ? { name } : {}),
+        landing_page: slug,
+        product_id: offer.product_id,
+        ...utm,
+        ...(fbclid ? { fbclid } : {}),
+      }),
+    }).catch(() => {
+      // best-effort: a dropped lead capture must not block the user flow
+    });
+  }
 
   async function handleSubmit() {
     setPhoneTouched(true);
@@ -55,22 +79,22 @@ export default function OrderForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          product_slug: slug,
+          product_id: offer.product_id,
           name,
           phone,
           address,
           size,
           shipping_option: shippingOptions[shipIdx].label,
           quantity: 1,
-          offer_label: offer.label,
           ...(hasColor && color ? { color } : {}),
           ...(hasNote && note ? { note } : {}),
         }),
       });
       if (!res.ok) return;
-      const order = (await res.json()) as OrderResponse;
-      setOrderId(order.order_id);
-      trackEvent("Purchase", { value: order.total, currency: "BDT", product_slug: slug });
+      const json = await res.json();
+      const order = json.data as OrderResponse;
+      setOrderId(String(order.id));
+      trackEvent("Purchase", { value: order.total_amount, currency: "BDT", product_slug: slug });
     } finally {
       setSubmitting(false);
     }
@@ -109,6 +133,7 @@ export default function OrderForm({
                 setPhone(v);
                 setPhoneTouched(true);
               }}
+              onBlur={maybeCaptureLead}
               placeholder="এখানে মোবাইল নম্বরটি লিখুন"
             />
             {phoneTouched && phone && !phoneValid && (
