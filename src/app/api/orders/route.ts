@@ -24,31 +24,43 @@ export async function POST(req: NextRequest) {
   const missing = REQUIRED_FIELDS.filter((field) => !body[field]);
   if (missing.length > 0) {
     return NextResponse.json(
-      { error: "validation_failed", fields: missing },
+      {
+        message: "The given data was invalid.",
+        errors: Object.fromEntries(missing.map((f) => [f, ["This field is required."]])),
+      },
       { status: 422 }
     );
   }
 
   if (!BD_PHONE_REGEX.test(body.phone!.trim())) {
     return NextResponse.json(
-      { error: "validation_failed", fields: ["phone"] },
+      {
+        message: "The given data was invalid.",
+        errors: { phone: ["Invalid phone number."] },
+      },
       { status: 422 }
     );
   }
 
   const product = getMockLandingPage(body.product_slug!);
   if (!product) {
-    return NextResponse.json({ error: "not_found" }, { status: 404 });
+    return NextResponse.json({ message: "Landing page not found" }, { status: 404 });
   }
 
   const shipping = product.shipping_options.find(
     (opt) => opt.label === body.shipping_option
   );
   const offer = product.offers.find((o) => o.label === body.offer_label);
-  if (!offer) {
-    return NextResponse.json({ error: "invalid_offer" }, { status: 422 });
+  if (!offer || !shipping) {
+    return NextResponse.json(
+      {
+        message: "The given data was invalid.",
+        errors: !offer ? { offer_label: ["Invalid offer."] } : { shipping_option: ["Invalid shipping option."] },
+      },
+      { status: 422 }
+    );
   }
-  const total = offer.price + (shipping?.cost ?? 0);
+  const total = offer.price + shipping.cost;
 
   const response: OrderResponse = {
     order_id: `ORD-${Date.now()}`,

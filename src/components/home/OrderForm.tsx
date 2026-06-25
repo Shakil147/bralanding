@@ -6,9 +6,8 @@ import OfferOption from "./order/OfferOption";
 import FormField from "./order/FormField";
 import ShippingOptions from "./order/ShippingOptions";
 import SummaryRow from "./order/SummaryRow";
-import { createOrder } from "@/lib/api";
 import { trackEvent } from "@/lib/fbPixel";
-import { Offer, ShippingOption } from "@/lib/types";
+import { Offer, OrderResponse, ShippingOption } from "@/lib/types";
 
 const BD_PHONE_REGEX = /^(?:\+?880|0)1[3-9]\d{8}$/;
 
@@ -51,18 +50,25 @@ export default function OrderForm({
     if (!name || !phone || !address || !phoneValid || submitting) return;
     setSubmitting(true);
     try {
-      const order = await createOrder({
-        product_slug: slug,
-        name,
-        phone,
-        address,
-        size,
-        shipping_option: shippingOptions[shipIdx].label,
-        quantity: 1,
-        offer_label: offer.label,
-        ...(hasColor && color ? { color } : {}),
-        ...(hasNote && note ? { note } : {}),
+      // Hits this app's own server route, never the external API directly from the browser.
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          product_slug: slug,
+          name,
+          phone,
+          address,
+          size,
+          shipping_option: shippingOptions[shipIdx].label,
+          quantity: 1,
+          offer_label: offer.label,
+          ...(hasColor && color ? { color } : {}),
+          ...(hasNote && note ? { note } : {}),
+        }),
       });
+      if (!res.ok) return;
+      const order = (await res.json()) as OrderResponse;
       setOrderId(order.order_id);
       trackEvent("Purchase", { value: order.total, currency: "BDT", product_slug: slug });
     } finally {
