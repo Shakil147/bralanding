@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
     // fbp/fbc are already in Meta's hashed-cookie format — pass verbatim.
     fbp: body.fbp,
     fbc: body.fbc,
+    em: hashEmq(body.email),
     ph: hashEmq(normalizedPhone),
     fn: hashEmq(firstName || undefined),
     ln: hashEmq(restName.length ? restName.join(" ") : undefined),

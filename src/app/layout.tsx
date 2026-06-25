@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Noto_Serif_Bengali } from "next/font/google";
 import Script from "next/script";
 import { getOrganization } from "@/lib/api";
+import PageViewTracker from "@/components/PageViewTracker";
 import "./globals.css";
 
 const notoSerifBengali = Noto_Serif_Bengali({
@@ -49,7 +50,6 @@ export default async function RootLayout({
                 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
                 document,'script','https://connect.facebook.net/en_US/fbevents.js');
                 fbq('init', '${FB_PIXEL_ID}');
-                fbq('track', 'PageView');
               `}
             </Script>
             <noscript>
@@ -61,6 +61,7 @@ export default async function RootLayout({
                 alt=""
               />
             </noscript>
+            <PageViewTracker />
           </>
         )}
         {children}

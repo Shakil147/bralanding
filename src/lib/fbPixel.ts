@@ -26,11 +26,12 @@ export function trackEvent(
     /** Raw PII — sent to CAPI only (hashed server-side), never to the Pixel. */
     phone?: string;
     name?: string;
+    email?: string;
   } = {}
 ) {
   const eventId = newEventId();
   const eventTime = Math.floor(Date.now() / 1000);
-  const { phone, name, ...pixelParams } = params;
+  const { phone, name, email, ...pixelParams } = params;
 
   if (typeof window !== "undefined" && window.fbq) {
     // Pixel gets only non-PII params; eventID is the CAPI dedup key.
@@ -48,6 +49,7 @@ export function trackEvent(
     ...fbCookies,
     ...(phone ? { phone } : {}),
     ...(name ? { name } : {}),
+    ...(email ? { email } : {}),
   };
 
   fetch("/api/fb-events", {

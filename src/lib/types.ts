@@ -142,6 +142,7 @@ export type FbEventName =
   | "PageView"
   | "ViewContent"
   | "InitiateCheckout"
+  | "Lead"
   | "Purchase";
 
 export type FbEventPayload = {
@@ -161,4 +162,5 @@ export type FbEventPayload = {
   /** Raw PII; hashed server-side only. Never forwarded to the browser Pixel. */
   phone?: string;
   name?: string;
+  email?: string;
 };

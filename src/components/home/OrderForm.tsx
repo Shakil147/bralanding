@@ -34,6 +34,7 @@ export default function OrderForm({
 }: Props) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [color, setColor] = useState("");
   const [note, setNote] = useState("");
@@ -64,19 +65,31 @@ export default function OrderForm({
   const shipping = shippingOptions[shipIdx].cost;
   const total = effectivePrice + shipping;
   const phoneValid = BD_PHONE_REGEX.test(phone.trim());
+  // Identity attached to CAPI events when available — boosts Event Match Quality.
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  function identity() {
+    return {
+      ...(phoneValid ? { phone: phone.trim() } : {}),
+      ...(name ? { name } : {}),
+      ...(emailValid ? { email: email.trim() } : {}),
+    };
+  }
 
   // Fire InitiateCheckout at most once per page session — repeated fires get
   // fresh event_ids that Meta can't dedupe and inflate the funnel.
   function fireInitiateCheckout(value: number) {
     if (icFiredRef.current) return;
     icFiredRef.current = true;
-    trackEvent("InitiateCheckout", { value, currency: "BDT", product_slug: slug });
+    trackEvent("InitiateCheckout", { value, currency: "BDT", product_slug: slug, ...identity() });
   }
 
   function maybeCaptureLead() {
     const trimmed = phone.trim();
     if (!phoneValid || trimmed === lastLeadPhoneRef.current) return;
     lastLeadPhoneRef.current = trimmed;
+
+    // Phone is valid here → strong-match Lead event to both Pixel and CAPI.
+    trackEvent("Lead", { product_slug: slug, ...identity() });
 
     const { fbclid, ...utm } = getUtmParams();
     fetch("/api/leads", {
@@ -139,7 +152,7 @@ export default function OrderForm({
       const json = await res.json();
       const order = json.data as OrderResponse;
       setOrderId(String(order.id));
-      trackEvent("Purchase", { value: order.total_amount, currency: "BDT", product_slug: slug, phone, name });
+      trackEvent("Purchase", { value: order.total_amount, currency: "BDT", product_slug: slug, ...identity() });
       Swal.fire({
         icon: "success",
         title: "ধন্যবাদ!",
@@ -193,6 +206,7 @@ export default function OrderForm({
                 সঠিক বাংলাদেশী মোবাইল নাম্বার দিন (যেমন: 01XXXXXXXXX)
               </p>
             )}
+            <FormField label="ইমেইল (optional)" value={email} onChange={setEmail} placeholder="আপনার ইমেইল" required={false} />
             <FormField label="সম্পূর্ন ঠিকানা" value={address} onChange={setAddress} placeholder="সম্পূর্ন ঠিকানা" />
 
             <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, fontSize: 20, color: "#333", marginBottom: 8 }}>
