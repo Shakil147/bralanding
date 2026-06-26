@@ -83,8 +83,8 @@ export type OrderPayload = {
   size: string;
   shipping_option: string;
   quantity?: number;
-  color?: string;
-  note?: string;
+  color?: string | null;
+  note?: string | null;
   session_token?: string;
 };
 

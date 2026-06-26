@@ -130,8 +130,8 @@ export default function OrderForm({
           shipping_option: shippingOptions[shipIdx].label,
           quantity: 1,
           session_token: getSessionToken(),
-          ...(hasColor && color ? { color } : {}),
-          ...(hasNote && note ? { note } : {}),
+          ...(hasColor ? { color: color || null } : {}),
+          ...(hasNote ? { note: note || null } : {}),
         }),
       });
       if (!res.ok) {
