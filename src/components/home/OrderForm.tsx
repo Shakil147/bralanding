@@ -206,7 +206,7 @@ export default function OrderForm({
                 সঠিক বাংলাদেশী মোবাইল নাম্বার দিন (যেমন: 01XXXXXXXXX)
               </p>
             )}
-            <FormField label="ইমেইল (optional)" value={email} onChange={setEmail} placeholder="আপনার ইমেইল" required={false} />
+            {/* <FormField label="ইমেইল (optional)" value={email} onChange={setEmail} placeholder="আপনার ইমেইল" required={false} /> */}
             <FormField label="সম্পূর্ন ঠিকানা" value={address} onChange={setAddress} placeholder="সম্পূর্ন ঠিকানা" />
 
             <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, color: "#333", marginBottom: 12 }} className="text-base xs:text-lg sm:text-xl md:text-2xl">

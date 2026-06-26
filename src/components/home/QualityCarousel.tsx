@@ -14,7 +14,7 @@ export default function QualityCarousel({
   return (
     <Swiper
       modules={[Autoplay]}
-      slidesPerView={2}
+      slidesPerView={1}
       spaceBetween={12}
       loop
       autoplay={{ delay: 1800, disableOnInteraction: false }}

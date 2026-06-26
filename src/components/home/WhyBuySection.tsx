@@ -10,7 +10,7 @@ export default function WhyBuySection({
 }) {
   return (
     <>
-      <SectionBand shapeDivider style={{ marginBottom: 6, paddingBottom: 32 }} textStyle={{ maxWidth: 980, marginLeft: "auto", marginRight: "auto" }} textClassName="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-[60px]">
+      <SectionBand shapeDivider style={{ marginBottom: 6, paddingBottom: 32 }} textStyle={{ maxWidth: 980, marginLeft: "auto", marginRight: "auto" }} textClassName="text-xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-[60px]">
         আমাদের কাছ থেকে কেন কিনবেন?
       </SectionBand>
 
