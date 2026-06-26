@@ -58,17 +58,17 @@ function normalizeLandingPage(raw: LandingPage): LandingPage {
 }
 
 export async function getLandingPages(): Promise<LandingPage[]> {
-  const pages = await apiFetch<LandingPage[]>("/landing-pages", "X-Public-Key", { cache: "no-store" });
+  const pages = await apiFetch<LandingPage[]>("/landing-pages", "X-Public-Key", { next: { revalidate: 60 } });
   return pages.map(normalizeLandingPage);
 }
 
 export async function getLandingPage(idOrSlug: string | number): Promise<LandingPage> {
-  const page = await apiFetch<LandingPage>(`/landing-pages/${idOrSlug}`, "X-Public-Key", { cache: "no-store" });
+  const page = await apiFetch<LandingPage>(`/landing-pages/${idOrSlug}`, "X-Public-Key", { next: { revalidate: 60 } });
   return normalizeLandingPage(page);
 }
 
 export function getOrganization(): Promise<Organization> {
-  return apiFetch<Organization>("/organization", "X-Private-Key", { cache: "no-store" });
+  return apiFetch<Organization>("/organization", "X-Private-Key", { next: { revalidate: 60 } });
 }
 
 // Used by this app's own Route Handlers (src/app/api/*), which proxy browser
