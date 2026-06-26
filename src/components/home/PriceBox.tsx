@@ -53,10 +53,10 @@ export default function PriceBox({
   const newSplit = newPriceLine ? splitPriceLine(newPriceLine) : null;
 
   return (
-    <section style={{ maxWidth: 1040, margin: "0 auto" }} className="px-4 sm:px-[22px] py-5 sm:py-[50px]">
-      <div style={{ background: "#F0F6FD", border: "1px solid var(--accent, #FF4600)", borderRadius: 16, textAlign: "center" }} className="p-[5px] sm:px-[20px] sm:py-[20px]">
+    <section style={{ maxWidth: 1040, margin: "0 auto" }} className="px-3 xs:px-4 sm:px-5 md:px-6 py-4 xs:py-6 sm:py-8 md:py-10 lg:py-[50px]">
+      <div style={{ background: "#F0F6FD", border: "1px solid var(--accent, #FF4600)", borderRadius: 16, textAlign: "center", overflow: "hidden" }} className="p-3 xs:p-4 sm:px-5 sm:py-6 md:px-6 md:py-8">
         {oldSplit && (
-          <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: "0 0 16px" }} className="text-lg sm:text-xl md:text-[33px]">
+          <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: "0 0 12px" }} className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-[33px]">
             {oldSplit.prefix}
             {oldSplit.price && (
               <span style={{ position: "relative", display: "inline-block", color: "#3a3a3a" }}>
@@ -67,7 +67,7 @@ export default function PriceBox({
           </p>
         )}
         {newSplit && (
-          <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: 0 }} className="text-lg sm:text-xl md:text-[33px]">
+          <p style={{ fontFamily: HIND, fontWeight: 600, color: "#3a3a3a", margin: 0 }} className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-[33px]">
             {newSplit.prefix}
             {newSplit.price && (
               <span style={{ position: "relative", display: "inline-block" }}>

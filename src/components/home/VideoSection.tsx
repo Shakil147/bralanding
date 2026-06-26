@@ -8,8 +8,8 @@ export default function VideoSection({
   title?: string;
 }) {
   return (
-    <section style={{ maxWidth: 880, margin: "0 auto", textAlign: "center" }} className="px-4 py-8 sm:px-5 sm:pt-[38px] sm:pb-[30px]">
-      <div style={{ borderRadius: 18, overflow: "hidden", boxShadow: "0 10px 34px rgba(0,0,0,.13)", position: "relative", paddingTop: "56.25%" }}>
+    <section style={{ maxWidth: 880, margin: "0 auto", textAlign: "center" }} className="px-3 xs:px-4 sm:px-5 md:px-6 py-6 xs:py-8 sm:pt-10 sm:pb-8 md:pt-12 md:pb-10">
+      <div style={{ borderRadius: 14, overflow: "hidden", boxShadow: "0 8px 24px rgba(0,0,0,.12)", position: "relative", paddingTop: "56.25%" }}>
         <iframe
           src={`https://www.youtube.com/embed/${videoId}`}
           title={title}
@@ -18,7 +18,9 @@ export default function VideoSection({
           style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
         />
       </div>
-      <OrderButton style={{ marginTop: 34 }} />
+      <div style={{ marginTop: 28 }} className="xs:mt-8 sm:mt-10 md:mt-14">
+        <OrderButton />
+      </div>
     </section>
   );
 }

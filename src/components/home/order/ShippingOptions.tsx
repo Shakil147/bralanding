@@ -14,8 +14,8 @@ export default function ShippingOptions({
       {options.map((opt, i) => (
         <label
           key={opt.label}
-          style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 18px", borderBottom: "1px solid #e4e9f0", cursor: "pointer", fontFamily: HIND, color: "#2a2a2a" }}
-          className="text-base sm:text-xl"
+          style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", borderBottom: "1px solid #e4e9f0", cursor: "pointer", fontFamily: HIND, color: "#2a2a2a" }}
+          className="text-sm xs:text-base sm:text-lg md:text-xl"
         >
           <input
             type="radio"

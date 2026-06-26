@@ -27,22 +27,22 @@ export default function Header({
   );
 
   return (
-    <header style={{ position: "relative", background: "var(--accent, #f85606)" }} className="text-center px-4 pt-10 sm:px-5 sm:pt-[54px]">
+    <header style={{ position: "relative", background: "var(--accent, #f85606)" }} className="text-center px-3 pt-6 xs:px-4 xs:pt-8 sm:px-5 sm:pt-12 md:pt-[54px]">
       <h1
-        style={{ fontFamily: HIND, fontWeight: 800, color: "#FFFFFF", lineHeight: 1, margin: "20px 0 0", padding: 0, textShadow: "0 2px 6px rgba(0,0,0,.12)" }}
-        className="text-4xl sm:text-5xl md:text-[80px]"
+        style={{ fontFamily: HIND, fontWeight: 800, color: "#FFFFFF", lineHeight: 1, margin: "12px 0 0", padding: 0, textShadow: "0 1px 3px rgba(0,0,0,.15)" }}
+        className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-[80px]"
       >
         {title}
       </h1>
-      <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "18px 0 18px" }} className="text-lg sm:text-xl md:text-2xl">
+      <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "14px 0 12px" }} className="text-base xs:text-lg sm:text-xl md:text-2xl">
         {subtitle}
       </p>
       {subtitle2 ? (
-        <p style={{ fontFamily: HIND, fontWeight: 500, color: "#fff", margin: "0 0 30px" }} className="text-base sm:text-lg md:text-xl">
+        <p style={{ fontFamily: HIND, fontWeight: 500, color: "#fff", margin: "0 0 24px" }} className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl">
           {highlightMatch ? (
             <>
               {subtitle2.slice(0, highlightMatch.index)}
-              <span style={{ position: "relative", display: "inline-block", paddingBottom: 8 }}>
+              <span style={{ position: "relative", display: "inline-block", paddingBottom: 6 }}>
                 <span>{highlightMatch[0]}</span>
                 {squiggle}
               </span>
@@ -53,15 +53,15 @@ export default function Header({
           )}
         </p>
       ) : (
-        <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "0 0 30px" }} className="text-lg sm:text-xl md:text-2xl">
+        <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "0 0 24px" }} className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl">
           {offerLabel ? `${offerLabel} ` : ""}অফার প্রাইজ{" "}
-          <span style={{ position: "relative", display: "inline-block", paddingBottom: 8 }}>
+          <span style={{ position: "relative", display: "inline-block", paddingBottom: 6 }}>
             <span>৳ {price} টাকা মাত্র</span>
             {squiggle}
           </span>
         </p>
       )}
-      <OrderButton style={{ marginBottom: 64 }} />
+      <OrderButton style={{ marginBottom: 48 }} />
       <svg
         viewBox="0 0 283.5 27.8"
         preserveAspectRatio="none"

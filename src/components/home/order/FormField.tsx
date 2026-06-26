@@ -17,7 +17,7 @@ export default function FormField({
 }) {
   return (
     <>
-      <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, fontSize: 20, color: "#333", marginBottom: 8 }}>
+      <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, color: "#333", marginBottom: 12 }} className="text-base xs:text-lg sm:text-xl md:text-2xl">
         {label} {required && <span style={{ color: "#e23b1f" }}>*</span>}
       </label>
       <input
@@ -25,7 +25,9 @@ export default function FormField({
         onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
         placeholder={placeholder}
-        style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 22, outline: "none" }}
+        type={label.includes("মোবাইল") ? "tel" : label.includes("ইমেইল") ? "email" : "text"}
+        style={{ width: "100%", fontFamily: HIND, border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 18, outline: "none" }}
+        className="px-3 py-3 xs:px-4 xs:py-3 sm:px-4 sm:py-4 text-base xs:text-lg sm:text-lg focus:ring-2 focus:ring-[var(--accent,#f85606)] focus:border-transparent"
       />
     </>
   );

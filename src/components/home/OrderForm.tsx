@@ -165,9 +165,9 @@ export default function OrderForm({
   }
 
   return (
-    <section id="order" style={{ maxWidth: 1140, margin: "46px auto 70px" }} className="px-4 sm:px-[22px]">
-      <div style={{ background: "#F0F6FD", borderStyle: "solid", borderWidth: "17px 5px 5px 5px", borderColor: "var(--accent, #F85606)", borderRadius: 16 }} className="px-0 pt-[10px] pb-[10px] sm:px-[30px] sm:pt-[30px] sm:pb-[30px]">
-        <h3 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 26px" }} className="text-xl sm:text-[25px]">আপনার পছন্দের অফারটি নির্বাচন করুন</h3>
+    <section id="order" style={{ maxWidth: 1140, margin: "30px auto 50px" }} className="px-3 xs:px-4 sm:px-5 md:px-6 lg:px-8">
+      <div style={{ background: "#F0F6FD", borderStyle: "solid", borderColor: "var(--accent, #F85606)", boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }} className="px-3 py-3 xs:px-4 xs:py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 rounded-2xl border-4">
+        <h3 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 20px" }} className="text-lg xs:text-xl sm:text-2xl md:text-[25px]">আপনার পছন্দের অফারটি নির্বাচন করুন</h3>
 
         {offers.map((o, i) => (
           <OfferOption
@@ -184,10 +184,10 @@ export default function OrderForm({
           />
         ))}
 
-        <div style={{ gap: 48 }} className="grid grid-cols-1 md:grid-cols-[1.05fr_.95fr] gap-8">
+        <div style={{ gap: 24 }} className="grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-6 sm:gap-8 lg:gap-10">
           {/* billing */}
           <div>
-            <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 24px" }} className="text-2xl sm:text-[30px]">Billing details</h4>
+            <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 20px" }} className="text-xl xs:text-2xl sm:text-2xl md:text-[30px]">Billing details</h4>
 
             <FormField label="আপনার নাম" value={name} onChange={setName} placeholder="এখানে আপনার নাম লিখুন" />
             <FormField
@@ -202,21 +202,22 @@ export default function OrderForm({
               placeholder="এখানে মোবাইল নম্বরটি লিখুন"
             />
             {phoneTouched && phone && !phoneValid && (
-              <p style={{ fontFamily: HIND, color: "#e23b1f", fontSize: 15, margin: "-16px 0 16px" }}>
+              <p style={{ fontFamily: HIND, color: "#e23b1f", margin: "-14px 0 16px" }} className="text-xs xs:text-sm sm:text-base">
                 সঠিক বাংলাদেশী মোবাইল নাম্বার দিন (যেমন: 01XXXXXXXXX)
               </p>
             )}
             <FormField label="ইমেইল (optional)" value={email} onChange={setEmail} placeholder="আপনার ইমেইল" required={false} />
             <FormField label="সম্পূর্ন ঠিকানা" value={address} onChange={setAddress} placeholder="সম্পূর্ন ঠিকানা" />
 
-            <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, fontSize: 20, color: "#333", marginBottom: 8 }}>
+            <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, color: "#333", marginBottom: 12 }} className="text-base xs:text-lg sm:text-xl md:text-2xl">
               সাইজ সিলেক্ট করুন <span style={{ color: "#e23b1f" }}>*</span>
             </label>
             {hasVariants ? (
               <select
                 value={variantIdx}
                 onChange={(e) => setVariantIdx(Number(e.target.value))}
-                style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 30, outline: "none" }}
+                style={{ width: "100%", fontFamily: HIND, border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 24, outline: "none" }}
+                className="px-3 py-3 xs:px-4 xs:py-3 sm:px-4 sm:py-4 text-base xs:text-lg sm:text-lg focus:ring-2 focus:ring-[var(--accent,#f85606)] focus:border-transparent"
               >
                 {variants!.map((v, i) => (
                   <option key={v.id} value={i}>{v.size}</option>
@@ -226,7 +227,8 @@ export default function OrderForm({
               <select
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
-                style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 30, outline: "none" }}
+                style={{ width: "100%", fontFamily: HIND, border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 24, outline: "none" }}
+                className="px-3 py-3 xs:px-4 xs:py-3 sm:px-4 sm:py-4 text-base xs:text-lg sm:text-lg focus:ring-2 focus:ring-[var(--accent,#f85606)] focus:border-transparent"
               >
                 {sizes.map((s) => (
                   <option key={s} value={s}>{s}</option>
@@ -240,7 +242,7 @@ export default function OrderForm({
 
             {hasNote && (
               <>
-                <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, fontSize: 20, color: "#333", marginBottom: 8 }}>
+                <label style={{ display: "block", fontFamily: HIND, fontWeight: 600, color: "#333", marginBottom: 12 }} className="text-base xs:text-lg sm:text-xl md:text-2xl">
                   Order notes (optional)
                 </label>
                 <textarea
@@ -248,15 +250,16 @@ export default function OrderForm({
                   onChange={(e) => setNote(e.target.value)}
                   placeholder="Order notes"
                   rows={3}
-                  style={{ width: "100%", fontFamily: HIND, fontSize: 19, padding: "13px 16px", border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 8, outline: "none", resize: "vertical" }}
+                  style={{ width: "100%", fontFamily: HIND, border: "1px solid #cdd6e0", borderRadius: 8, background: "#fff", marginBottom: 8, outline: "none", resize: "vertical" }}
+                  className="px-3 py-3 xs:px-4 xs:py-3 sm:px-4 sm:py-4 text-base xs:text-lg sm:text-lg focus:ring-2 focus:ring-[var(--accent,#f85606)] focus:border-transparent"
                 />
-                <p style={{ fontFamily: HIND, fontSize: 14, color: "#777", margin: "0 0 22px" }}>
+                <p style={{ fontFamily: HIND, color: "#777", margin: "0 0 18px" }} className="text-xs xs:text-sm sm:text-base">
                   Notes about your order, e.g. special notes for delivery.
                 </p>
               </>
             )}
 
-            <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 18px" }} className="text-2xl sm:text-[30px]">Shipping</h4>
+            <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 16px" }} className="text-xl xs:text-2xl sm:text-2xl md:text-[30px]">Shipping</h4>
             <ShippingOptions
               shipIdx={shipIdx}
               onChange={(i) => {
@@ -269,36 +272,36 @@ export default function OrderForm({
 
           {/* order summary */}
           <div>
-            <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 22px" }} className="text-2xl sm:text-[30px]">Your order</h4>
-            <SummaryRow label="Product" value={`৳ ${effectivePrice}`} bold size={22} />
-            <div style={{ alignItems: "center", padding: "18px 0", borderBottom: "1px dashed #c5cfdb" }} className="flex flex-wrap gap-3 sm:flex-nowrap sm:gap-[18px]">
-              <img src={effectiveImg} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-14 h-16 sm:w-16 sm:h-[74px]" />
-              <span style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21 }} className="basis-full sm:basis-auto sm:flex-1">{offer.label}</span>
-              <span style={{ fontFamily: HIND, fontSize: 20, color: "#555" }}>× 1</span>
-              <span style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21, marginLeft: "auto" }} className="sm:ml-0">৳ {effectivePrice}</span>
+            <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 18px" }} className="text-xl xs:text-2xl sm:text-2xl md:text-[30px]">Your order</h4>
+            <SummaryRow label="Product" value={`৳ ${effectivePrice}`} bold size="lg" />
+            <div style={{ alignItems: "center", padding: "14px 0", borderBottom: "1px dashed #c5cfdb" }} className="flex flex-wrap gap-3 xs:gap-2 sm:gap-4 md:gap-5">
+              <img src={effectiveImg} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-14 h-16 xs:w-16 xs:h-20 sm:w-16 sm:h-[74px]" />
+              <span style={{ fontFamily: HIND, fontWeight: 600 }} className="basis-full xs:basis-auto xs:flex-1 text-base xs:text-lg sm:text-xl md:text-2xl">{offer.label}</span>
+              <span style={{ fontFamily: HIND, color: "#555" }} className="text-base xs:text-lg sm:text-xl md:text-2xl">× 1</span>
+              <span style={{ fontFamily: HIND, fontWeight: 600, marginLeft: "auto" }} className="text-base xs:text-lg sm:text-xl md:text-2xl sm:ml-0">৳ {effectivePrice}</span>
             </div>
             <SummaryRow label="Subtotal" value={`৳ ${effectivePrice}`} bold />
             <SummaryRow label="Shipping" value={`৳ ${shipping}`} />
-            <SummaryRow label="Total" value={`৳ ${total}`} bold size={24} dashed={false} />
+            <SummaryRow label="Total" value={`৳ ${total}`} bold size="lg" dashed={false} />
 
-            <p style={{ fontFamily: HIND, fontWeight: 600, fontSize: 21, color: "#333", margin: "10px 0 10px" }}>ক্যাশ অন ডেলিভারি</p>
-            <div style={{ position: "relative", background: "#ededed", borderRadius: 8, padding: "18px 20px", marginBottom: 24, fontFamily: HIND, fontSize: 20, color: "#3a3a3a" }}>
-              <span style={{ position: "absolute", top: -9, left: 24, width: 16, height: 16, background: "#ededed", transform: "rotate(45deg)" }} />
+            <p style={{ fontFamily: HIND, fontWeight: 600, color: "#333", margin: "8px 0 10px" }} className="text-base xs:text-lg sm:text-xl md:text-2xl">ক্যাশ অন ডেলিভারি</p>
+            <div style={{ position: "relative", background: "#ededed", borderRadius: 8, padding: "14px 16px", marginBottom: 20, fontFamily: HIND, color: "#3a3a3a" }} className="text-base xs:text-lg sm:text-xl md:text-2xl">
+              <span style={{ position: "absolute", top: -7, left: 16, width: 14, height: 14, background: "#ededed", transform: "rotate(45deg)" }} />
               পণ্য হাতে পেয়ে টাকা পরিশোধ করুন
             </div>
 
             {orderId ? (
-              <div style={{ fontFamily: HIND, fontWeight: 600, color: "#1d7a3a", textAlign: "center", padding: 16 }}>
+              <div style={{ fontFamily: HIND, fontWeight: 600, color: "#1d7a3a", textAlign: "center", padding: 14 }} className="text-base xs:text-lg sm:text-xl md:text-2xl">
                 ধন্যবাদ! আপনার অর্ডার গ্রহণ করা হয়েছে। অর্ডার নম্বর: {orderId}
               </div>
             ) : (
               <button
                 onClick={handleSubmit}
                 disabled={submitting || (phoneTouched && !phoneValid)}
-                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: HIND, fontWeight: 700, color: "#fff", background: "var(--accent, #f85606)", border: "none", borderRadius: 12, padding: 18, cursor: submitting ? "default" : "pointer", boxShadow: "0 5px 0 rgba(0,0,0,.12)", opacity: submitting || (phoneTouched && !phoneValid) ? 0.7 : 1 }}
-                className="text-xl sm:text-2xl"
+                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, fontFamily: HIND, fontWeight: 700, color: "#fff", background: "var(--accent, #f85606)", border: "none", borderRadius: 12, cursor: submitting ? "default" : "pointer", boxShadow: "0 4px 8px rgba(0,0,0,.15)", opacity: submitting || (phoneTouched && !phoneValid) ? 0.7 : 1 }}
+                className="px-4 py-4 xs:px-5 xs:py-4 sm:px-6 sm:py-5 md:px-8 md:py-6 text-base xs:text-lg sm:text-xl md:text-2xl"
               >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                   <circle cx="9" cy="21" r="1" />
                   <circle cx="20" cy="21" r="1" />
                   <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
