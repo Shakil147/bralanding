@@ -30,15 +30,15 @@ export default function Header({
     <header style={{ position: "relative", background: "var(--accent, #f85606)" }} className="text-center px-3 pt-6 xs:px-4 xs:pt-8 sm:px-5 sm:pt-12 md:pt-[54px]">
       <h1
         style={{ fontFamily: HIND, fontWeight: 800, color: "#FFFFFF", lineHeight: 1, margin: "12px 0 0", padding: 0, textShadow: "0 1px 3px rgba(0,0,0,.15)" }}
-        className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-[80px]"
+        className="text-xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-[80px]"
       >
         {title}
       </h1>
-      <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "14px 0 12px" }} className="text-base xs:text-lg sm:text-xl md:text-2xl">
+      <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "14px 0 12px" }} className="text-xs xs:text-lg sm:text-xl md:text-2xl">
         {subtitle}
       </p>
       {subtitle2 ? (
-        <p style={{ fontFamily: HIND, fontWeight: 500, color: "#fff", margin: "0 0 24px" }} className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl">
+        <p style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", margin: "0 0 24px" }} className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl">
           {highlightMatch ? (
             <>
               {subtitle2.slice(0, highlightMatch.index)}
