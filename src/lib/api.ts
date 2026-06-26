@@ -1,3 +1,4 @@
+import { cache } from "react";
 import {
   LandingPage,
   LeadPayload,
@@ -57,19 +58,21 @@ function normalizeLandingPage(raw: LandingPage): LandingPage {
   };
 }
 
-export async function getLandingPages(): Promise<LandingPage[]> {
+// Wrapped in React cache() so the metadata pass and the render pass within a
+// single request share one fetch+parse instead of doing the work twice.
+export const getLandingPages = cache(async (): Promise<LandingPage[]> => {
   const pages = await apiFetch<LandingPage[]>("/landing-pages", "X-Public-Key", { next: { revalidate: 60 } });
   return pages.map(normalizeLandingPage);
-}
+});
 
-export async function getLandingPage(idOrSlug: string | number): Promise<LandingPage> {
+export const getLandingPage = cache(async (idOrSlug: string | number): Promise<LandingPage> => {
   const page = await apiFetch<LandingPage>(`/landing-pages/${idOrSlug}`, "X-Public-Key", { next: { revalidate: 60 } });
   return normalizeLandingPage(page);
-}
+});
 
-export function getOrganization(): Promise<Organization> {
+export const getOrganization = cache((): Promise<Organization> => {
   return apiFetch<Organization>("/organization", "X-Private-Key", { next: { revalidate: 60 } });
-}
+});
 
 // Used by this app's own Route Handlers (src/app/api/*), which proxy browser
 // requests to Laravel while holding the private key server-side. Returns the

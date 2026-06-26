@@ -1,12 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { HIND, OFFERS, SHIPPING_OPTS, SIZES } from "./data";
 import OfferOption from "./order/OfferOption";
 import FormField from "./order/FormField";
 import ShippingOptions from "./order/ShippingOptions";
 import SummaryRow from "./order/SummaryRow";
-import Swal from "sweetalert2";
+
+// sweetalert2 is heavy (~40KB gz) and only needed after the user submits —
+// load it lazily so it stays out of the initial page bundle.
+const loadSwal = () => import("sweetalert2").then((m) => m.default);
 import { trackEvent } from "@/lib/fbPixel";
 import { getSessionToken, getUtmParams } from "@/lib/attribution";
 import { Offer, OrderResponse, ShippingOption } from "@/lib/types";
@@ -132,6 +136,7 @@ export default function OrderForm({
       });
       if (!res.ok) {
         const json = await res.json().catch(() => null);
+        const Swal = await loadSwal();
         if (json?.errors?.order) {
           Swal.fire({
             icon: "info",
@@ -153,6 +158,7 @@ export default function OrderForm({
       const order = json.data as OrderResponse;
       setOrderId(String(order.id));
       trackEvent("Purchase", { value: order.total_amount, currency: "BDT", product_slug: slug, ...identity() });
+      const Swal = await loadSwal();
       Swal.fire({
         icon: "success",
         title: "ধন্যবাদ!",
@@ -275,7 +281,7 @@ export default function OrderForm({
             <h4 style={{ fontFamily: HIND, fontWeight: 700, color: "#222", margin: "0 0 18px" }} className="text-xl xs:text-2xl sm:text-2xl md:text-[30px]">Your order</h4>
             <SummaryRow label="Product" value={`৳ ${effectivePrice}`} bold size="lg" />
             <div style={{ alignItems: "center", padding: "14px 0", borderBottom: "1px dashed #c5cfdb" }} className="flex flex-wrap gap-3 xs:gap-2 sm:gap-4 md:gap-5">
-              <img src={effectiveImg} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-14 h-16 xs:w-16 xs:h-20 sm:w-16 sm:h-[74px]" />
+              <Image src={effectiveImg} alt="" width={64} height={74} sizes="64px" style={{ objectFit: "cover", borderRadius: 4 }} className="w-14 h-16 xs:w-16 xs:h-20 sm:w-16 sm:h-[74px]" />
               <span style={{ fontFamily: HIND, fontWeight: 600 }} className="basis-full xs:basis-auto xs:flex-1 text-base xs:text-lg sm:text-xl md:text-2xl">{offer.label}</span>
               <span style={{ fontFamily: HIND, color: "#555" }} className="text-base xs:text-lg sm:text-xl md:text-2xl">× 1</span>
               <span style={{ fontFamily: HIND, fontWeight: 600, marginLeft: "auto" }} className="text-base xs:text-lg sm:text-xl md:text-2xl sm:ml-0">৳ {effectivePrice}</span>

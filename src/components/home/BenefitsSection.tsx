@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BENEFITS } from "./data";
 import SectionBand from "./SectionBand";
 
@@ -27,8 +28,8 @@ export default function BenefitsSection({
             </li>
           ))}
         </ul>
-        <div style={{ borderRadius: 12, overflow: "hidden", boxShadow: "0 6px 20px rgba(0,0,0,.1)", justifySelf: "center" }} className="w-full max-h-[300px] xs:max-h-[400px] sm:max-h-[500px] md:max-h-[600px] lg:max-h-none">
-          <img src={banner} alt="পণ্য" style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }} />
+        <div style={{ position: "relative", aspectRatio: "1/1", borderRadius: 12, overflow: "hidden", boxShadow: "0 6px 20px rgba(0,0,0,.1)", justifySelf: "center" }} className="w-full max-h-[300px] xs:max-h-[400px] sm:max-h-[500px] md:max-h-[600px] lg:max-h-none">
+          <Image src={banner} alt="পণ্য" fill sizes="(max-width: 1024px) 100vw, 540px" style={{ objectFit: "cover" }} />
         </div>
       </section>
     </>

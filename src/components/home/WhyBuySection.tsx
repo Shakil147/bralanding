@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { WHY_BUY } from "./data";
 import SectionBand from "./SectionBand";
 
@@ -15,8 +16,8 @@ export default function WhyBuySection({
       </SectionBand>
 
       <section style={{ background: "#F9F9FE", maxWidth: 1080, margin: "0 auto", alignItems: "center" }} className="grid grid-cols-1 lg:grid-cols-[.92fr_1.08fr] gap-4 xs:gap-5 sm:gap-6 md:gap-8 lg:gap-11 px-3 xs:px-4 sm:px-5 md:px-6 py-4 xs:py-5 sm:py-6 md:py-8 lg:py-10">
-        <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid #000", order: 2, display: "flex", alignItems: "center" }} className="lg:order-1">
-          <img src={image} alt="মডেল" style={{ display: "block", width: "100%", height: "auto", objectFit: "cover" }} className="max-h-[300px] xs:max-h-[400px] sm:max-h-[500px] md:max-h-[600px] lg:max-h-none w-full" />
+        <div style={{ position: "relative", aspectRatio: "1/1", borderRadius: 12, overflow: "hidden", border: "1px solid #000", order: 2 }} className="lg:order-1 max-h-[300px] xs:max-h-[400px] sm:max-h-[500px] md:max-h-[600px] lg:max-h-none w-full">
+          <Image src={image} alt="মডেল" fill sizes="(max-width: 1024px) 100vw, 500px" style={{ objectFit: "cover" }} />
         </div>
         <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 12, order: 1 }} className="lg:order-2">
           {whyBuy.map((w) => (

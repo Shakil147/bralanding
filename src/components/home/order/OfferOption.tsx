@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { HIND } from "../data";
 
 export default function OfferOption({
@@ -37,7 +38,7 @@ export default function OfferOption({
         onChange={onSelect}
         style={{ width: 22, height: 22, accentColor: "var(--accent, #f85606)" }}
       />
-      <img src={img} alt="" style={{ objectFit: "cover", borderRadius: 4 }} className="w-16 h-[72px] sm:w-[84px] sm:h-[96px]" />
+      <Image src={img} alt="" width={84} height={96} sizes="84px" style={{ objectFit: "cover", borderRadius: 4 }} className="w-16 h-[72px] sm:w-[84px] sm:h-[96px]" />
       <span
         style={{
           fontFamily: HIND,
