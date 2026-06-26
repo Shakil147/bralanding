@@ -4,7 +4,7 @@ import SectionBand from "./SectionBand";
 
 export default function WhyBuySection({
   whyBuy = WHY_BUY,
-  image = "https://narimoncloset.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg",
+  image = "https://ebazaru.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg",
 }: {
   whyBuy?: string[];
   image?: string;

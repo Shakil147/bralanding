@@ -5,7 +5,7 @@ import SectionBand from "./SectionBand";
 export default function BenefitsSection({
   title = "ইন্ডিয়ান লাইক মি ব্রা ব্যবহারে যেসব সুবিধা পাবেন:",
   benefits = BENEFITS,
-  banner = "https://narimoncloset.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
+  banner = "https://ebazaru.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
 }: {
   title?: string;
   benefits?: string[];

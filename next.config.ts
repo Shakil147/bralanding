@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
       // Live product/landing imagery.
       { protocol: "https", hostname: "landing.elevenpos.online", pathname: "/storage/**" },
       // Fallback defaults baked into data.ts.
-      { protocol: "https", hostname: "narimoncloset.com", pathname: "/uploads/**" },
+      { protocol: "https", hostname: "ebazaru.com", pathname: "/uploads/**" },
     ],
   },
 };
