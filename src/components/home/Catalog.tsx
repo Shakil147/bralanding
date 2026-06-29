@@ -32,20 +32,15 @@ export default function Catalog({ pages }: { pages: LandingPage[] }) {
                 <h3 style={{ fontFamily: HIND, fontWeight: 600, margin: "0 0 8px", lineHeight: 1.3 }} className="text-sm xs:text-base sm:text-base md:text-lg">
                   {page.title}
                 </h3>
-                <div style={{ fontFamily: HIND, display: "flex", flexDirection: "column", gap: 4, marginTop: "auto" }}>
+                <div style={{ fontFamily: HIND, display: "flex", alignItems: "baseline", gap: 6, marginTop: "auto" }}>
+                  <span style={{ fontWeight: 700, color: "#f85606" }} className="text-sm xs:text-base sm:text-lg md:text-xl">
+                    ৳{cheapest.price}
+                  </span>
                   {cheapest.old_price ? (
                     <span style={{ color: "#999", textDecoration: "line-through", fontSize: "0.875em" }} className="text-xs xs:text-sm">
                       ৳{cheapest.old_price}
                     </span>
                   ) : null}
-                  <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-                    <span style={{ fontWeight: 700, color: "#f85606" }} className="text-sm xs:text-base sm:text-lg md:text-xl">
-                      ৳{cheapest.price}
-                    </span>
-                    {/* <span style={{ fontSize: "0.875em", color: "#555" }} className="text-xs xs:text-sm">
-                      থেকে
-                    </span> */}
-                  </div>
                 </div>
                 <div
                   style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", background: "#f85606", textAlign: "center", borderRadius: 6, padding: "8px 0", marginTop: 10 }}

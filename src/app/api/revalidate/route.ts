@@ -7,7 +7,7 @@ const KNOWN_TAGS = ["landing-pages", "organization"];
 // the site reflects it immediately instead of waiting for the 60s ISR window.
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("X-Revalidate-Secret");
-  if (!secret || secret !== process.env.REVALIDATE_SECRET) {
+  if (!secret || secret !== process.env.LARAVEL_API_SECRET_KEY) {
     return NextResponse.json({ revalidated: false, message: "Invalid secret" }, { status: 401 });
   }
 
