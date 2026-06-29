@@ -47,6 +47,12 @@ export default function Catalog({ pages }: { pages: LandingPage[] }) {
                     </span>
                   </div>
                 </div>
+                <div
+                  style={{ fontFamily: HIND, fontWeight: 600, color: "#fff", background: "#f85606", textAlign: "center", borderRadius: 6, padding: "8px 0", marginTop: 10 }}
+                  className="text-xs xs:text-sm sm:text-base"
+                >
+                  অর্ডার করুন
+                </div>
               </div>
             </Link>
           );

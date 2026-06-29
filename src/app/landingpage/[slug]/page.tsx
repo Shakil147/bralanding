@@ -13,7 +13,7 @@ import OrderForm from "@/components/home/OrderForm";
 import FloatingButtons from "@/components/home/FloatingButtons";
 import ViewContentTracker from "@/components/home/ViewContentTracker";
 import VisitorSessionTracker from "@/components/home/VisitorSessionTracker";
-import { getLandingPage } from "@/lib/api";
+import { getLandingPage, getOrganization } from "@/lib/api";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -35,7 +35,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function LandingPage({ params }: Params) {
   const { slug } = await params;
-  const page = await getLandingPage(slug).catch(() => null);
+  const [page, org] = await Promise.all([
+    getLandingPage(slug).catch(() => null),
+    getOrganization().catch(() => null),
+  ]);
 
   if (!page) notFound();
 
@@ -62,7 +65,7 @@ export default async function LandingPage({ params }: Params) {
         hasNote={page.hasNote}
         contactPhone={page.phone}
       />
-      <FloatingButtons whatsapp={page.whatsapp} />
+      <FloatingButtons whatsapp={page.whatsapp} socialLinks={org?.social_links} />
     </div>
   );
 }
