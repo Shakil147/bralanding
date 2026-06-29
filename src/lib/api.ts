@@ -61,17 +61,23 @@ function normalizeLandingPage(raw: LandingPage): LandingPage {
 // Wrapped in React cache() so the metadata pass and the render pass within a
 // single request share one fetch+parse instead of doing the work twice.
 export const getLandingPages = cache(async (): Promise<LandingPage[]> => {
-  const pages = await apiFetch<LandingPage[]>("/landing-pages", "X-Public-Key", { next: { revalidate: 60 } });
+  const pages = await apiFetch<LandingPage[]>("/landing-pages", "X-Public-Key", {
+    next: { revalidate: 60, tags: ["landing-pages"] },
+  });
   return pages.map(normalizeLandingPage);
 });
 
 export const getLandingPage = cache(async (idOrSlug: string | number): Promise<LandingPage> => {
-  const page = await apiFetch<LandingPage>(`/landing-pages/${idOrSlug}`, "X-Public-Key", { next: { revalidate: 60 } });
+  const page = await apiFetch<LandingPage>(`/landing-pages/${idOrSlug}`, "X-Public-Key", {
+    next: { revalidate: 60, tags: ["landing-pages"] },
+  });
   return normalizeLandingPage(page);
 });
 
 export const getOrganization = cache((): Promise<Organization> => {
-  return apiFetch<Organization>("/organization", "X-Private-Key", { next: { revalidate: 60 } });
+  return apiFetch<Organization>("/organization", "X-Private-Key", {
+    next: { revalidate: 60, tags: ["organization"] },
+  });
 });
 
 // Used by this app's own Route Handlers (src/app/api/*), which proxy browser

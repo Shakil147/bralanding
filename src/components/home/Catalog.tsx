@@ -42,9 +42,9 @@ export default function Catalog({ pages }: { pages: LandingPage[] }) {
                     <span style={{ fontWeight: 700, color: "#f85606" }} className="text-sm xs:text-base sm:text-lg md:text-xl">
                       ৳{cheapest.price}
                     </span>
-                    <span style={{ fontSize: "0.875em", color: "#555" }} className="text-xs xs:text-sm">
+                    {/* <span style={{ fontSize: "0.875em", color: "#555" }} className="text-xs xs:text-sm">
                       থেকে
-                    </span>
+                    </span> */}
                   </div>
                 </div>
                 <div
