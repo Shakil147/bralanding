@@ -1,8 +1,20 @@
 import { Organization } from "@/lib/types";
 import { HIND } from "./data";
 
+const SOCIAL_LABELS: Record<string, string> = {
+  facebook: "Facebook",
+  messenger: "Messenger",
+  youtube: "YouTube",
+  instagram: "Instagram",
+  tiktok: "TikTok",
+  x: "X",
+  whatsapp: "WhatsApp",
+};
+
 export default function Footer({ org }: { org: Organization | null }) {
   if (!org) return null;
+
+  const socialLinks = Object.entries(org.social_links ?? {}).filter(([, url]) => !!url) as [string, string][];
 
   return (
     <footer style={{ background: "#222", color: "#ccc" }} className="px-4 py-8 sm:px-[22px]">
@@ -16,11 +28,11 @@ export default function Footer({ org }: { org: Organization | null }) {
           {org.email ? <p style={{ margin: "4px 0" }}>ইমেইল: {org.email}</p> : null}
           {org.address ? <p style={{ margin: "4px 0" }}>ঠিকানা: {org.address}</p> : null}
         </div>
-        {Array.isArray(org.social_links) && org.social_links.length ? (
+        {socialLinks.length ? (
           <div style={{ marginTop: 16, display: "flex", gap: 16, flexWrap: "wrap" }}>
-            {org.social_links.map((url) => (
-              <a key={url} href={url} target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontFamily: HIND, fontSize: 14, textDecoration: "underline" }}>
-                {url.replace(/^https?:\/\//, "")}
+            {socialLinks.map(([platform, url]) => (
+              <a key={platform} href={url} target="_blank" rel="noopener noreferrer" style={{ color: "#fff", fontFamily: HIND, fontSize: 14, textDecoration: "underline" }}>
+                {SOCIAL_LABELS[platform] ?? platform}
               </a>
             ))}
           </div>

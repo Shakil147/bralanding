@@ -59,8 +59,19 @@ export type LandingPage = {
   hasNote?: boolean;
 };
 
+export type SocialLinks = {
+  facebook?: string;
+  messenger?: string;
+  youtube?: string;
+  instagram?: string;
+  tiktok?: string;
+  x?: string;
+  whatsapp?: string;
+};
+
 export type Organization = {
   name: string;
+  tagline?: string;
   slug: string;
   logo?: string;
   favicon?: string;
@@ -68,8 +79,15 @@ export type Organization = {
   whatsapp?: string;
   email?: string;
   address?: string;
+  website_url?: string;
   default_color?: string;
-  social_links?: string[];
+  secondary_color?: string;
+  timezone?: string;
+  locale?: string;
+  currency?: string;
+  social_links?: SocialLinks;
+  ga4_id?: string;
+  gtm_id?: string;
   facebook_pixel_id?: string;
   /** Secret Conversions API token — only present via the private (sk_) key. Never forward to client-side JS. */
   facebook_capi_token?: string;

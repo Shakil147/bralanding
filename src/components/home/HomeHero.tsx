@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { HIND } from "./data";
 
-export default function HomeHero({ name, logo }: { name?: string; logo?: string }) {
+export default function HomeHero({ name, logo, tagline }: { name?: string; logo?: string; tagline?: string }) {
   return (
     <header style={{ background: "var(--accent, #f85606)" }} className="text-center px-4 py-10 sm:px-5 sm:py-14">
       {logo && (
@@ -22,7 +22,7 @@ export default function HomeHero({ name, logo }: { name?: string; logo?: string 
         {name || "আমাদের দোকান"}
       </h1>
       <p style={{ fontFamily: HIND, fontWeight: 500, color: "#fff", margin: "12px 0 0" }} className="text-base sm:text-lg">
-        মানসম্মত পণ্য, সহজে অর্ডার, ক্যাশ অন ডেলিভারি সুবিধা
+        {tagline || "মানসম্মত পণ্য, সহজে অর্ডার, ক্যাশ অন ডেলিভারি সুবিধা"}
       </p>
     </header>
   );

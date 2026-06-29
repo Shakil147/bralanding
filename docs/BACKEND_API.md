@@ -114,7 +114,7 @@ Single landing page by numeric `id` or `slug`. Same shape as one item above (no 
 Write-only (plus one read, `/organization` — moved here since it carries the Facebook CAPI config). Use these from server-side / backend integrations, not directly from public frontend JS (don't expose the secret key client-side).
 
 ### GET `/organization`
-Current organization profile (resolved from the API key).
+Current organization profile + settings (resolved from the API key). Mirrors everything editable on the dashboard's "Organization Settings" page.
 
 **Response 200**
 ```json
@@ -122,6 +122,7 @@ Current organization profile (resolved from the API key).
   "success": true,
   "data": {
     "name": "Acme Store",
+    "tagline": "Quality you can trust",
     "slug": "acme-store",
     "logo": "https://.../logo.png",
     "favicon": "https://.../favicon.ico",
@@ -129,14 +130,25 @@ Current organization profile (resolved from the API key).
     "whatsapp": "8801XXXXXXXXX",
     "email": "hello@acme.com",
     "address": "...",
+    "website_url": "https://acme.com",
     "default_color": "#000000",
+    "secondary_color": "#6c757d",
+    "timezone": "Asia/Dhaka",
+    "locale": "en",
+    "currency": "BDT",
+    "tax_id": "TAX-12345",
+    "billing_email": "billing@acme.com",
     "social_links": [],
+    "ga4_id": "G-XXXXXXXXXX",
+    "gtm_id": "GTM-XXXXXXX",
     "facebook_pixel_id": "1234567890123456",
-    "facebook_capi_token": "EAAxxxxxxxxxxxxx..."
+    "facebook_capi_token": "EAAxxxxxxxxxxxxx...",
+    "page_terms": "...",
+    "page_privacy": "..."
   }
 }
 ```
-`facebook_capi_token` is the secret Conversions API access token — only returned here because this endpoint requires the private (`sk_`) key. Never log or forward it to client-side JS.
+`facebook_capi_token` is the secret Conversions API access token, and `tax_id`/`billing_email` are billing details — these are only returned here because this endpoint requires the private (`sk_`) key. Never log or forward them to client-side JS.
 
 ### POST `/orders`
 Create a sale/order for a product shown on a landing page.
