@@ -4,10 +4,10 @@ import SectionBand from "./SectionBand";
 
 export default function WhyBuySection({
   whyBuy = WHY_BUY,
-  image = "https://ebazaru.com/uploads/all/UwGp7rqzsHYExqfL6OwJqjZ3LsLfBdOoO9OyMjUI.jpg",
+  image,
 }: {
   whyBuy?: string[];
-  image?: string;
+  image: string;
 }) {
   return (
     <>

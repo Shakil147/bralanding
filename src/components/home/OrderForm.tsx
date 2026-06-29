@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { HIND, OFFERS, SHIPPING_OPTS, SIZES } from "./data";
+import { HIND, SHIPPING_OPTS, SIZES } from "./data";
 import OfferOption from "./order/OfferOption";
 import FormField from "./order/FormField";
 import ShippingOptions from "./order/ShippingOptions";
@@ -19,7 +19,7 @@ const BD_PHONE_REGEX = /^(?:\+?880|0)1[3-9]\d{8}$/;
 
 type Props = {
   slug?: string;
-  offers?: Offer[];
+  offers: Offer[];
   sizes?: string[];
   shippingOptions?: ShippingOption[];
   hasColor?: boolean;
@@ -29,7 +29,7 @@ type Props = {
 
 export default function OrderForm({
   slug = "guddi-bra",
-  offers = OFFERS,
+  offers,
   sizes = SIZES,
   shippingOptions = SHIPPING_OPTS,
   hasColor = false,

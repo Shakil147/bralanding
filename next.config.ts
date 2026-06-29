@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
 
+// Laravel serves uploaded assets (logo, favicon, landing-page imagery) from
+// the same host as the API itself — derive the allowed image host from
+// LARAVEL_API_BASE_URL (.env.local) instead of hardcoding a domain here.
+const apiHost = new URL(process.env.LARAVEL_API_BASE_URL ?? "http://localhost:8000/api");
+
 const nextConfig: NextConfig = {
   images: {
     // Serve modern formats; AVIF preferred, WebP fallback.
@@ -8,11 +13,16 @@ const nextConfig: NextConfig = {
     qualities: [50, 60, 75],
     // Optimized images change rarely — cache them for 31 days.
     minimumCacheTTL: 2678400,
+    // Local dev API host (Valet/Herd *.test) resolves to a private IP;
+    // Next 16 blocks local-IP optimization by default.
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
-      // Live product/landing imagery.
-      { protocol: "https", hostname: "landing.elevenpos.online", pathname: "/storage/**" },
-      // Fallback defaults baked into data.ts.
-      { protocol: "https", hostname: "ebazaru.com", pathname: "/uploads/**" },
+      {
+        protocol: apiHost.protocol.replace(":", "") as "http" | "https",
+        hostname: apiHost.hostname,
+        port: apiHost.port,
+        pathname: "/**",
+      },
     ],
   },
 };

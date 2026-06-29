@@ -26,23 +26,6 @@ export const IMPORTANT_POINTS = [
   "অর্ডার কনফার্ম করার জন্য আমাদের কল সেন্টার থেকে ফোন করে অর্ডার কনফার্ম করা হবে।",
 ];
 
-export const OFFERS = [
-  {
-    product_id: 1,
-    img: "https://ebazaru.com/uploads/all/QYRGQxHDatu8ncUdaDB1EroGnjYW593G7dSJyl07.jpg",
-    label: "ইন্ডিয়ান লাইক মি ব্রা 2 pcs",
-    price: 750,
-    old_price: 1000,
-  },
-  {
-    product_id: 2,
-    img: "https://ebazaru.com/uploads/all/QbOzWS8ZPf2blVfseopJ81wYPvH7e50TDmXuFOv0.jpg",
-    label: "LuvLace Bra 3 pcs",
-    price: 999,
-    old_price: 1500,
-  },
-];
-
 export const SIZES = ["32", "34", "36", "38", "40", "42", "44"];
 
 export const SHIPPING_OPTS = [
